@@ -7,64 +7,70 @@ var items = [
   },
   {
     name: 'Toy Tree',
-    description: 'Try to make it grow!*<p><br><p><br><p><br><p><br><p><br><p><br>*It wont.',
-    price: 8.99,
+    description: 'Try to make it grow!* *It wont.',
+    price: 4.99,
     image: 'https://s-media-cache-ak0.pinimg.com/236x/89/1f/93/891f938b71a4a0301c2458b8f9855527.jpg',
   },
   {
-    name: 'Toy Marmalade',
-    description: 'Fan favorite!',
+    name: 'Toy Bear',
+    description: 'A bear that\'s a toy! \'Cause real bears hurt!',
     price: 8.99,
-    image: 'http://i.dailymail.co.uk/i/pix/2011/01/30/article-0-0CE189DB000005DC-8_233x400.jpg',
+    image: 'http://www.toysrus.com/graphics/product_images/pTRU1-20603499enh-z6.jpg',
   },
 ]
 
-function buildItemsList(itemArray) {
-  itemArray.forEach(function (item) {
 
-    var $container = document.querySelector('.container')
-
-    var $slotRow = document.createElement('div')
-    var $slotCol = document.createElement('div')
-    var $imagePriceTextRow = document.createElement('div')
-    var $imagePriceCol = document.createElement('div')
-    var $imageRow = document.createElement('div')
-    var $imageCol = document.createElement('div')
-    var $priceRow = document.createElement('div')
-    var $priceCol = document.createElement('div')
-    var $textRow = document.createElement('div')
-    var $textCol = document.createElement('div')
-    var $hr = document.createElement('div')
-
-    $slotRow.classList.add('row')
-    $slotCol.classList.add('col-xs-12')
-    $imagePriceTextRow.classList.add('row')
-    $imagePriceCol.classList.add('col-xs-4')
-    $imageRow.classList.add('row')
-    $imageCol.classList.add('col-xs-12')
-    $imageCol.classList.add('image')
-    $imageCol.classList.add('thumbnail')
-    $priceRow.classList.add('row')
-    $priceCol.classList.add('col-xs-12')
-    $textRow.classList.add('row')
-    $textCol.classList.add('col-xs-8')
-
-    $container.appendChild($slotRow)
-    $slotRow.appendChild($slotCol)
-    $slotCol.appendChild($imagePriceTextRow)
-    $imagePriceTextRow.appendChild($imagePriceCol)
-    $imagePriceCol.appendChild($imageRow)
-    $imageRow.appendChild($imageCol)
-    $imagePriceCol.appendChild($priceRow)
-    $priceRow.appendChild($priceCol)
-    $imagePriceTextRow.appendChild($textCol)
-    $slotCol.appendChild($hr)
-
-    $imageCol.innerHTML = '<img src="' + item.image + '" />'
-    $priceCol.innerHTML = '<h4>$' + item.price
-    $textCol.innerHTML = '<h2>' + item.name + '</h2><p>' + item.description
-    $hr.innerHTML = '<hr>'
- })
+function renderListView(list) {
+  list.forEach(function (item) {
+    function renderElements(tagName, attributes, children, content, root) {
+      var $element = document.createElement(tagName)
+      for (var key in attributes) {
+        $element.setAttribute(key, attributes[key])
+      }
+      if (content !== undefined) {
+        content.forEach(function(content) {
+          if (content === 'name') {
+            var $h2 = document.createElement('h2')
+            $h2.textContent = item.name
+            $element.appendChild($h2)
+          }
+          if (content === 'description') {
+            var $description = document.createTextNode(item.description)
+            $element.appendChild($description)
+          }
+          if (content === 'image') {
+            var $image = document.createElement('img')
+            $image.setAttribute('src', item.image)
+            $element.appendChild($image)
+          }
+          if (content === 'price') {
+            $element.textContent = '$' + item.price
+          }
+        })
+      }
+      if (children !== undefined) {
+        children.forEach(function (child) {
+          $element.appendChild(child)
+        })
+      }
+      return $element
+    }
+    var $listView = document.querySelector('#listView')
+    var r = renderElements
+    var n = undefined
+    var $text = r('div', {'class': 'col-xs-8'}, n, ['name', 'description'])
+    var $price = r('div', {'class': 'col-xs-12'}, n, ['price'])
+    var $image = r('div', {'class': 'col-xs-12 image thumbnail'}, n, ['image'])
+    var $priceRow = r('div', {'class': 'row'}, [$price])
+    var $imageRow = r('div', {'class': 'row'}, [$image])
+    var $imagePriceColumn = r('div', {'class': 'col-xs-4'}, [$imageRow, $priceRow])
+    var $imagePriceTextRow = r('div', {'class': 'row'}, [$imagePriceColumn, $text])
+    var $slot = r('div', {'class': 'col-xs-12 slot'}, [$imagePriceTextRow])
+    var $slotRow = r('div', {'class': 'row'}, [$slot])
+    var $hr = document.createElement('hr')
+    $slot.appendChild($hr)
+    $listView.appendChild($slotRow)
+  })
 }
 
-buildItemsList(items)
+renderListView(items)
