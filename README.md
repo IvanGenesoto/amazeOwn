@@ -1,2 +1,2 @@
 # amazeown
-An Amazon-like shopping site.
+A website for people who want to shop online.
