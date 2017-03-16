@@ -22,22 +22,26 @@ var items = [
 
 function renderListView(list) {
   list.forEach(function (item) {
-    function renderElements(tagName, attributes, children, content, root) {
+    function renderElements(tagName, attributes, children, content) {
       var $element = document.createElement(tagName)
       for (var key in attributes) {
         $element.setAttribute(key, attributes[key])
       }
       if (content !== undefined) {
-        content.forEach(function(content) {
-          if (content === 'name') {
-            var $h2 = document.createElement('h2')
-            $h2.textContent = item.name
-            $element.appendChild($h2)
-          }
-          if (content === 'description') {
-            var $description = document.createTextNode(item.description)
-            $element.appendChild($description)
-          }
+        if (Array.isArray(content) === true) {
+          content.forEach(function(content) {
+            if (content === 'name') {
+              var $h2 = document.createElement('h2')
+              $h2.textContent = item.name
+              $element.appendChild($h2)
+            }
+            if (content === 'description') {
+              var $description = document.createTextNode(item.description)
+              $element.appendChild($description)
+            }
+          })
+        }
+        else {
           if (content === 'image') {
             var $image = document.createElement('img')
             $image.setAttribute('src', item.image)
@@ -46,12 +50,17 @@ function renderListView(list) {
           if (content === 'price') {
             $element.textContent = '$' + item.price
           }
-        })
+        }
       }
       if (children !== undefined) {
-        children.forEach(function (child) {
-          $element.appendChild(child)
-        })
+        if (Array.isArray(children) === true) {
+          children.forEach(function (child) {
+            $element.appendChild(child)
+          })
+        }
+        else {
+          $element.appendChild(children)
+        }
       }
       return $element
     }
@@ -59,14 +68,14 @@ function renderListView(list) {
     var r = renderElements
     var n = undefined
     var $text = r('div', {'class': 'col-xs-8'}, n, ['name', 'description'])
-    var $price = r('div', {'class': 'col-xs-12'}, n, ['price'])
-    var $image = r('div', {'class': 'col-xs-12 image thumbnail'}, n, ['image'])
-    var $priceRow = r('div', {'class': 'row'}, [$price])
-    var $imageRow = r('div', {'class': 'row'}, [$image])
+    var $price = r('div', {'class': 'col-xs-12'}, n, 'price')
+    var $image = r('div', {'class': 'col-xs-12 image thumbnail'}, n, 'image')
+    var $priceRow = r('div', {'class': 'row'}, $price)
+    var $imageRow = r('div', {'class': 'row'}, $image)
     var $imagePriceColumn = r('div', {'class': 'col-xs-4'}, [$imageRow, $priceRow])
     var $imagePriceTextRow = r('div', {'class': 'row'}, [$imagePriceColumn, $text])
-    var $slot = r('div', {'class': 'col-xs-12 slot'}, [$imagePriceTextRow])
-    var $slotRow = r('div', {'class': 'row'}, [$slot])
+    var $slot = r('div', {'class': 'col-xs-12 slot'}, $imagePriceTextRow)
+    var $slotRow = r('div', {'class': 'row'}, $slot)
     var $hr = document.createElement('hr')
     $slot.appendChild($hr)
     $listView.appendChild($slotRow)
