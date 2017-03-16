@@ -100,13 +100,13 @@ function renderListView(list) {
     }
     function renderElements(tagName, attributes, children, content) {
       var $element = document.createElement(tagName)
+      $element.classList.add('item')
       for (var key in attributes) {
         $element.setAttribute(key, attributes[key])
       }
       var $image = document.createElement('img')
       $image.setAttribute('src', item.image)
       $image.classList.add('image')
-      $image.classList.add('thumbnail')
       $element.appendChild($image)
       var $name = document.createElement('h4')
       $name.textContent = item.name
