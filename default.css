@@ -3,6 +3,10 @@
   align-content: center;
 }
 
-.image.thumbnail {
-  width: 20vw;
+.item {
+  width: 33%;
+}
+
+.image {
+  width: 160px;
 }
