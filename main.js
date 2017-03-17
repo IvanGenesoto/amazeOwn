@@ -42,7 +42,7 @@ var items = [
     rating: 4.5,
     image: 'https://images-na.ssl-images-amazon.com/images/I/71p56XR7kPL._SL1200_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81okr%2BOTR1L._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg',
   },
   {
     id: 7891652,
