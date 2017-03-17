@@ -2,8 +2,34 @@
   position: relative;
 }
 
+#nav {
+  background-color: #226a99;
+  height: 90px;
+  margin: 0;
+}
+
+#cart-container {
+  position: relative;
+  float: right;
+}
+
+#cart-img {
+  float: right;
+  height: 56px;
+  margin: 17px 40px;
+}
+
+#item-count {
+  position: absolute;
+  top: 25px;
+  right: 55px;
+  color: #226a99;
+  font-size: 15px;
+  font-weight: bold;
+}
+
 .container {
-  margin: 8vh 8vw;
+  margin: 7vh 8vw;
 }
 
 .hidden {
@@ -30,4 +56,9 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.add-cart {
+  background-color: #f0bc29;
+  float: right;
 }
