@@ -1,6 +1,13 @@
-.slot {
-  margin: 2vw 10vw;
-  align-content: center;
+#details {
+  position: relative;
+}
+
+.container {
+  margin: 8vh 8vw;
+}
+
+.hidden {
+  display: none;
 }
 
 .item {
@@ -9,4 +16,18 @@
 
 .image {
   width: 160px;
+}
+
+.image.details {
+  width: 100%;
+}
+
+.details {
+  padding-left: 8vw;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
