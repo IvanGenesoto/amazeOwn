@@ -1,3 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-undef-init */
+/* eslint-disable no-cond-assign */
+/* eslint-disable no-constant-condition */
+
 var items = [
   {
     id: 9823741,
@@ -7,7 +13,7 @@ var items = [
     rating: 4.5,
     image: 'https://images-na.ssl-images-amazon.com/images/I/61GW03zyu2L._SL1000_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/71NNRvbcJ9L._SL1200_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/51YTbe98liL._SL1000_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/51YTbe98liL._SL1000_.jpg'
   },
   {
     id: 8726192,
@@ -17,17 +23,17 @@ var items = [
     rating: 4,
     image: 'https://images-na.ssl-images-amazon.com/images/I/61QA%2BrcoPbL._SL1000_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/61DUI7jlQHL._SL1000_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ePnCmB%2BkL._SL1000_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ePnCmB%2BkL._SL1000_.jpg'
   },
   {
     id: 4127349,
     name: 'Generic VHEM Fidget Cube Relieves Stress & Anxiety Attention Toy',
-    description: 'For all those of you out there with problems clicking, rolling, spinning and fidgeting during meetings, there\'s fidget cube: the desk toy that helps you focus. If you\'re a chronic fidgeted then the fidget cube is the gadget for you. It¡¯s specifically designed for people who can\'t keep their fingers still and whether you¡¯re a clicker, a flicker, a roller or a spinner, the cube has something to satisfy every type of fidgeted. An unusually addicting, high-quality desk toy designed to help you focus. Fidget at work, in class and at home in style.',
+    description: 'For all those of you out there with problems clicking, rolling, spinning and fidgeting during meetings, there\'s fidget cube: the desk toy that helps you focus. If you\'re a chronic fidgeted then the fidget cube is the gadget for you. It\'s specifically designed for people who can\'t keep their fingers still and whether you¡¯re a clicker, a flicker, a roller or a spinner, the cube has something to satisfy every type of fidgeted. An unusually addicting, high-quality desk toy designed to help you focus. Fidget at work, in class and at home in style. ',
     price: 2.03,
     rating: 3,
     image: 'https://images-na.ssl-images-amazon.com/images/I/61rwgeW8ZqL._SL1200_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/61rjitxG1SL._SL1200_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/61fTUg-HgUL._SL1200_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/61fTUg-HgUL._SL1200_.jpg'
   },
   {
     id: 2164276,
@@ -37,17 +43,17 @@ var items = [
     rating: 4,
     image: 'https://images-na.ssl-images-amazon.com/images/I/71M0gwhIlUL._SL1500_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81yw-NJIYLL._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ARG9-Mo6L._SL1500_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ARG9-Mo6L._SL1500_.jpg'
   },
   {
     id: 1723643,
     name: 'Fat Brain Toys Squigz Deluxe Set',
-    description: 'Squigz are fun little suckers! Apply pressure to two Squigz. Air rushes out and the fun rushes in! Connecting to each other and to any solid, non-porous surface - Squigz are a species all their own. They flex. They stick. They suck people into creativity. Once they take hold, it takes some pull to separate them. When Squigz POP! in protest - you\'ll have to admit. your hands and ears are shamelessly delighted! They are flexible fellows and committed joiners. Squigz and fellow Squigz have one chief enterprise - creating things. Willingly, they assemble to become rockets, vehicles, a cushion for the cat, jewelry. they thrill in uniting as a ginormous octopus or squid. Squigz are scientific sorts - always up for playful experimentation and defying gravity - sticking to bathtubs, windows, school lockers, tabletops, and office desktops. (And they are mannerly guests too - never leaving a trace of their presence.) Playful curiosity. It\'s a whole new gig - thanks to Squigz.',
+    description: 'Squigz are fun little suckers! Apply pressure to two Squigz. Air rushes out and the fun rushes in! Connecting to each other and to any solid, non-porous surface - Squigz are a species all their own. They flex. They stick. They suck people into creativity. Once they take hold, it takes some pull to separate them. When Squigz POP! in protest - you\'ll have to admit. your hands and ears are shamelessly delighted! They are flexible fellows and committed joiners. Squigz and fellow Squigz have one chief enterprise - creating things. Willingly, they assemble to become rockets, vehicles, a cushion for the cat, jewelry. they thrill in uniting as a ginormous octopus or squid. Squigz are scientific sorts - always up for playful experimentation and defying gravity - sticking to bathtubs, windows, school lockers, tabletops, and office desktops. (And they are mannerly guests too - never leaving a trace of their presence.) Playful curiosity. It\'s a whole new gig, thanks to Squigz.',
     price: 49.95,
     rating: 4.5,
     image: 'https://images-na.ssl-images-amazon.com/images/I/71p56XR7kPL._SL1200_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81okr%2BOTR1L._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg'
   },
   {
     id: 7891652,
@@ -57,20 +63,20 @@ var items = [
     rating: 4,
     image: 'https://images-na.ssl-images-amazon.com/images/I/81A9LcHa9qL._SL1500_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81b3delkSpL._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/81c38ZHgzTL._SL1500_.jpg',
-    },
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/81c38ZHgzTL._SL1500_.jpg'
+  }
 ]
 
-views = [
+var views = [
   $listView = document.querySelector('#list'),
   $detailsView = document.querySelector('#details'),
   $imageView = document.querySelector('#image'),
   $cartView = document.querySelector('#cart'),
-  $checkoutView = document.querySelector('#checkout'),
+  $checkoutView = document.querySelector('#checkout')
 ]
 
 function activeView(active) {
-  views.forEach(function(view) {
+  views.forEach(function (view) {
     view.classList.add('hidden')
   })
   active.classList.remove('hidden')
@@ -92,40 +98,8 @@ function buildElement(tag, parent, attributes, text) {
   return $element
 }
 
-function getStars(item) {
-  if (item.rating === 0) {
-    stars = 'stars/0.png'
-  }
-  if (item.rating === 0.5) {
-    stars = 'stars/0-5.png'
-  }
-  if (item.rating === 1) {
-    stars = 'stars/1.png'
-  }
-  if (item.rating === 1.5) {
-    stars = 'stars/1-5.png'
-  }
-  if (item.rating === 2) {
-    stars = 'stars/2.png'
-  }
-  if (item.rating === 2.5) {
-    stars = 'stars/2-5.png'
-  }
-  if (item.rating === 3) {
-    stars = 'stars/3.png'
-  }
-  if (item.rating === 3.5) {
-    stars = 'stars/3-5.png'
-  }
-  if (item.rating === 4) {
-    stars = 'stars/4.png'
-  }
-  if (item.rating === 4.5) {
-    stars = 'stars/4-5.png'
-  }
-  if (item.rating === 5) {
-    stars = 'stars/5.png'
-  }
+function getStars(rating) {
+  stars = 'stars/' + rating + '.png'
 }
 
 function renderListView() {
@@ -145,7 +119,7 @@ function renderListView() {
       var price = item.price.toFixed(2)
       $price.textContent = '$' + price
       $column.insertAdjacentElement('beforeend', $price)
-      getStars(item)
+      getStars(item.rating)
       var $rating = b('img', n, {'src': stars})
       $column.insertAdjacentElement('beforeend', $rating)
       itemsInRow += 1
@@ -164,6 +138,16 @@ function renderListView() {
   })
 }
 
+function getItem(number) {
+  items.forEach(function(item) {
+    for (var id in item) {
+      if (item[id] === number) {
+        selectedItem = item
+      }
+    }
+  })
+}
+
 function renderDetailsView(id) {
   getItem(id)
   var $row = b('div', $detailsView, {'class': 'row'})
@@ -178,13 +162,14 @@ function renderDetailsView(id) {
   })
   $imageColumn.appendChild($image)
   var $name = b('h2', $detailsColumn, n, selectedItem.name)
+  getStars(selectedItem.rating)
   var $rating = b('img', $detailsColumn, {'src': stars})
   var $line = b('hr', $detailsColumn)
   var $details = b('p', $detailsColumn, n, selectedItem.description)
   var $button = b('button', $detailsView, {'class': 'btn btn-default back'}, 'BACK')
   $button.addEventListener('click', function(event) {
     if (event.target = true) {
-      $detailsView.innerHTML= ''
+      $detailsView.innerHTML = ''
       activeView($listView)
     }
   })
@@ -202,16 +187,7 @@ function renderImageView(image) {
   })
 }
 
-function getItem(number) {
-  items.forEach(function(item){
-    for (var id in item) {
-      if (item[id] === number) {
-        selectedItem = item
-      }
-    }
-  })
-}
-
+var selectedItem
 var n = undefined
 var b = buildElement
 renderListView()
