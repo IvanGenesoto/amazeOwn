@@ -4,85 +4,211 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable no-constant-condition */
 
-var items = [
-  {
-    id: 9823741,
-    name: 'D-FantiX Cyclone Boys 3x3 Speed Cube Stickerless Magic Cube 3x3x3 Puzzles Toys (56mm)',
-    description: 'D-FantiX Cyclone Boys 3x3 Speed Cube is an outstanding cube with great overall performance. It strikes a good balance between affordability and performance. Suitable for beginner and professional player. The 3x3 cube has an endless amount of ways to solve it. Depending on whether you figure it out yourself or get help from tutorials.',
-    price: 7.99,
-    rating: 4.5,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/61GW03zyu2L._SL1000_.jpg',
-    image2: 'https://images-na.ssl-images-amazon.com/images/I/71NNRvbcJ9L._SL1200_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/51YTbe98liL._SL1000_.jpg'
-  },
-  {
-    id: 8726192,
-    name: 'Fire Kids Edition Tablet, 7" Display, 16 GB, Blue Kid-Proof Case',
-    description: 'Fire Kids Edition starts in Amazon FreeTime, which is built from the ground up just for kids. The background color and fonts change to a kid-friendly design, kids only see the titles that they have access to see, the home screen carousel shows their recently viewed titles, and they can even navigate visually to content based on characters or topics—for example "Elmo," "Dinosaurs," or "Puppies.”',
-    price: 99.99,
-    rating: 4,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/61QA%2BrcoPbL._SL1000_.jpg',
-    image2: 'https://images-na.ssl-images-amazon.com/images/I/61DUI7jlQHL._SL1000_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ePnCmB%2BkL._SL1000_.jpg'
-  },
-  {
-    id: 4127349,
-    name: 'Generic VHEM Fidget Cube Relieves Stress & Anxiety Attention Toy',
-    description: 'For all those of you out there with problems clicking, rolling, spinning and fidgeting during meetings, there\'s fidget cube: the desk toy that helps you focus. If you\'re a chronic fidgeted then the fidget cube is the gadget for you. It\'s specifically designed for people who can\'t keep their fingers still and whether you¡¯re a clicker, a flicker, a roller or a spinner, the cube has something to satisfy every type of fidgeted. An unusually addicting, high-quality desk toy designed to help you focus. Fidget at work, in class and at home in style. ',
-    price: 2.03,
-    rating: 3,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/61rwgeW8ZqL._SL1200_.jpg',
-    image2: 'https://images-na.ssl-images-amazon.com/images/I/61rjitxG1SL._SL1200_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/61fTUg-HgUL._SL1200_.jpg'
-  },
-  {
-    id: 2164276,
-    name: 'SPINTECH - Omega Tri-Spinner Fidget Toy With Premium Hybrid Ceramic Bearing',
-    description: 'This performance spinner is injection molded from ABS plastic. This results in a better finish, higher strength, and much higher shatter resistance when compared to more common 3D printed spinners. The high performance ZrO2 hybrid ceramic bearing in the center allows for up to 3 minute spins, and glides effortlessly in your hands. The 3 additional bearings around the sides have been choses for their slightly higher weight, which gives the spinner additional inertia for long spins, and each side bearing also provides great off-center fidgeting fun.',
-    price: 1.50,
-    rating: 4,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/71M0gwhIlUL._SL1500_.jpg',
-    image2: 'https://images-na.ssl-images-amazon.com/images/I/81yw-NJIYLL._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ARG9-Mo6L._SL1500_.jpg'
-  },
-  {
-    id: 1723643,
-    name: 'Fat Brain Toys Squigz Deluxe Set',
-    description: 'Squigz are fun little suckers! Apply pressure to two Squigz. Air rushes out and the fun rushes in! Connecting to each other and to any solid, non-porous surface - Squigz are a species all their own. They flex. They stick. They suck people into creativity. Once they take hold, it takes some pull to separate them. When Squigz POP! in protest - you\'ll have to admit. your hands and ears are shamelessly delighted! They are flexible fellows and committed joiners. Squigz and fellow Squigz have one chief enterprise - creating things. Willingly, they assemble to become rockets, vehicles, a cushion for the cat, jewelry. they thrill in uniting as a ginormous octopus or squid. Squigz are scientific sorts - always up for playful experimentation and defying gravity - sticking to bathtubs, windows, school lockers, tabletops, and office desktops. (And they are mannerly guests too - never leaving a trace of their presence.) Playful curiosity. It\'s a whole new gig, thanks to Squigz.',
-    price: 49.95,
-    rating: 4.5,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/71p56XR7kPL._SL1200_.jpg',
-    image2: 'https://images-na.ssl-images-amazon.com/images/I/81okr%2BOTR1L._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg'
-  },
-  {
-    id: 7891652,
-    name: 'Space Scooter Ride On, White',
-    description: 'Discover a new way to move! The Space Scooter award winning design means that you and your family can experience a fun and unique way to travel. Reconnect with the outdoors on a foldable scooter which is faster than a traditional kick scooter and more compact and convenient than a bike!',
-    price: 149.95,
-    rating: 4,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/81A9LcHa9qL._SL1500_.jpg',
-    image2: 'https://images-na.ssl-images-amazon.com/images/I/81b3delkSpL._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/81c38ZHgzTL._SL1500_.jpg'
+function preloadExs(frame) {
+  if (frame < 6) {
+    frame += 1
+    var exID = 'ex' + frame
+    var ex = 'ex/' + frame + '.png'
+    var $ex = b('img', n, {'id': exID, 'src': ex})
+    makeClickable($ex, n, false, n, 'ex')
+    exs.push($ex)
+    preloadExs(frame)
   }
-]
+}
 
-var views = [
-  $listView = document.querySelector('#list'),
-  $detailsView = document.querySelector('#details'),
-  $imageView = document.querySelector('#image'),
-  $cartView = document.querySelector('#cart'),
-  $checkoutView = document.querySelector('#checkout')
-]
-
-function activeView(active) {
+function activateView($targetView) {
   views.forEach(function (view) {
     view.classList.add('hidden')
   })
-  active.classList.remove('hidden')
+  $targetView.classList.remove('hidden')
+  currentView = $targetView
 }
 
-function buildElement(tag, parent, attributes, text) {
+function makeClickable($element, $targetView, rerender, imageOrID, argument) {
+  $element.addEventListener('click', function(event) {
+    if (event.target = true) {
+      if (argument === 'plus' || argument === 'minus') {
+        updateQuantity(imageOrID, argument)
+      }
+      else {
+        browsingHistory.push(currentView)
+        if (promoUp === true) {
+          var $nav = document.querySelector('#nav')
+          var $promo = document.querySelector('#promo')
+          $nav.removeChild($promo)
+          promoUp = false
+        }
+        if (rerender === true) {
+          $targetView.innerHTML = ''
+          if ($targetView === $listView) {
+            renderListView()
+          }
+          if ($targetView === $detailsView) {
+            renderDetailsView(imageOrID)
+          }
+          if ($targetView === $imageView) {
+            renderImageView(imageOrID)
+          }
+          if ($targetView === $cartView) {
+            renderCartView()
+          }
+        }
+        if (argument === 'catchMe' || argument === 'ex') {
+          renderPromo()
+        }
+        else {
+          activateView($targetView)
+        }
+      }
+    }
+  })
+}
+
+function getItem(id) {
+  var match
+  items.forEach(function(item) {
+    for (var property in item) {
+      if (property === 'id') {
+        if (item[property] === id) {
+          match = item
+        }
+      }
+    }
+  })
+  return match
+}
+
+function getStars(rating) {
+  stars = 'stars/' + rating + '.png'
+}
+
+function addToCart(id) {
+  dupe = false
+  cart.forEach(function(item) {
+    for (var property in item) {
+      if (property === 'id') {
+        if (item[property] === id) {
+          item.quantity += 1
+          dupe = true
+        }
+      }
+    }
+  })
+  if (dupe === false) {
+    var item = {'id': id, 'quantity': 1}
+    cart.push(item)
+  }
+  itemCount += 1
+  $itemCount.textContent = itemCount
+  if (twirling === false) {
+    var $cartContainer = document.querySelector('#cart-container')
+    var $catchMe = b('span', $cartContainer, {'id': 'catch-me'}, n, 'beforebegin')
+    makeClickable($catchMe, n, false, n, 'catchMe')
+    forward(1)
+  }
+}
+
+function forward(frame) {
+  twirling = true
+  if (frame > 5) {
+    backward(6)
+  }
+  else {
+    frame += 1
+    twirl(frame, forward, false)
+  }
+}
+
+function twirl(frame, direction, reverse) {
+  var $name = document.querySelector('#name')
+  var arrayPosition = frame - 1
+  var $ex = exs[arrayPosition]
+  $name.nextElementSibling.remove()
+  $name.insertAdjacentElement('afterend', $ex)
+  window.setTimeout(direction, 41.67, frame)
+}
+
+function backward(frame) {
+  frame -= 1
+  if (frame > 1) {
+    twirl(frame, backward, true)
+  }
+  else {
+    var $cartContainer = document.querySelector('#cart-container')
+    $cartContainer.previousElementSibling.remove()
+    $name.nextElementSibling.remove()
+    $name.insertAdjacentElement('afterend', $ex1)
+    twirling = false
+  }
+}
+
+function renderPromo() {
+  var $nav = document.querySelector('#nav')
+  var promoText = 'You\'re quick! Use promo code CAUGHTME for 15% off.'
+  var $promo = b('p', n, {'id': 'promo'}, promoText)
+  $nav.insertAdjacentElement('afterbegin', $promo)
+  promoUp = true
+}
+
+function buildBackButton() {
+  var $nav = document.querySelector('#nav')
+  var $back = b('button', $nav, {'class': 'btn btn-default', 'id': 'back'}, 'BACK')
+  $back.addEventListener('click', function(event) {
+    if (event.target = true) {
+      if (browsingHistory.length > 0) {
+        last = browsingHistory.length - 1
+        var previous = browsingHistory[last]
+        activateView(previous)
+        browsingHistory.splice(last)
+      }
+    }
+  })
+}
+
+function customizeAddToCartButton(id) {
+  var $addToCart = document.querySelector('.add-cart')
+  $addToCart.addEventListener('mouseover', function(event) {
+    event.target.style.backgroundColor = '#26c431'
+    event.target.style.borderColor = '#208226'
+    event.target.style.color = 'white'
+  })
+  $addToCart.addEventListener('mouseout', function(event) {
+    event.target.style.backgroundColor = '#f0bc29'
+    event.target.style.borderColor = '#96771E'
+  })
+  $addToCart.addEventListener('click', function(event) {
+    if (event.target = true) {
+      addToCart(id)
+    }
+  })
+}
+
+function updateQuantity(id, math) {
+  cart.forEach(function(object) {
+    for (var property in object) {
+      if (property === 'id') {
+        if (object[property] === id) {
+          if (math === 'plus') {
+            object.quantity += 1
+            itemCount += 1
+            $itemCount.textContent = itemCount
+          }
+          else {
+            if (object.quantity > 0) {
+              object.quantity -= 1
+              itemCount -= 1
+              $itemCount.textContent = itemCount
+            }
+          }
+          $cartView.innerHTML = ''
+          renderCartView()
+        }
+      }
+    }
+  })
+}
+
+function buildElement(tag, parent, attributes, text, position) {
   var $element = document.createElement(tag)
   if (attributes !== undefined) {
     for (var key in attributes) {
@@ -93,13 +219,14 @@ function buildElement(tag, parent, attributes, text) {
     $element.textContent = text
   }
   if (parent !== undefined) {
-    parent.appendChild($element)
+    if (position === undefined) {
+      parent.insertAdjacentElement('beforeend', $element)
+    }
+    else {
+      parent.insertAdjacentElement(position, $element)
+    }
   }
   return $element
-}
-
-function getStars(rating) {
-  stars = 'stars/' + rating + '.png'
 }
 
 function renderListView() {
@@ -112,24 +239,16 @@ function renderListView() {
     }
     function buildColumn() {
       var $column = b('div', $row, {'class': 'col-xs-4 item'})
-      var $image = b('img', $column, {'class': 'image', 'src': item.image})
-      var $name = b('h2', n, n, item.name)
-      $column.insertAdjacentElement('beforeend', $name)
-      var $price = b('h3')
+      makeClickable($column, $detailsView, true, item.id)
+      var $image = b('img', $column, {'class': 'list image', 'src': item.image})
+      var $name = b('h3', $column, n, item.name)
+      var $dollar = b('h3', $column, {'class': 'dollar'}, '$')
+      var $price = b('h3', $column, {'class': 'price'})
       var price = item.price.toFixed(2)
-      $price.textContent = '$' + price
-      $column.insertAdjacentElement('beforeend', $price)
+      $price.textContent = price
       getStars(item.rating)
-      var $rating = b('img', n, {'src': stars})
-      $column.insertAdjacentElement('beforeend', $rating)
+      var $rating = b('img', $column, {'src': stars, 'class': 'rating'})
       itemsInRow += 1
-      $column.addEventListener('click', function(event) {
-        if (event.target = true) {
-          var id = item.id
-          renderDetailsView(id)
-          activeView($detailsView)
-        }
-      })
     }
     if (itemsInRow === 0 || itemsInRow % 3 === 0) {
       buildRow()
@@ -138,56 +257,113 @@ function renderListView() {
   })
 }
 
-function getItem(number) {
-  items.forEach(function(item) {
-    for (var id in item) {
-      if (item[id] === number) {
-        selectedItem = item
-      }
-    }
-  })
-}
-
 function renderDetailsView(id) {
-  getItem(id)
+  var item = getItem(id)
   var $row = b('div', $detailsView, {'class': 'row'})
   var $imageColumn = b('div', $row, {'class': 'col-xs-4'})
   var $detailsColumn = b('div', $row, {'class': 'col-xs-8 details'})
-  var $image = b('img', $imageColumn, {'class': 'image details', 'src': selectedItem.image})
-  $image.addEventListener('click', function(event) {
-    if (event.target = true) {
-      renderImageView(selectedItem.image)
-      activeView($imageView)
-    }
-  })
+  $image = b('img', $imageColumn, {'class': 'details image', 'src': item.image})
+  makeClickable($image, $imageView, true, item.image)
   $imageColumn.appendChild($image)
-  var $name = b('h2', $detailsColumn, n, selectedItem.name)
-  getStars(selectedItem.rating)
-  var $rating = b('img', $detailsColumn, {'src': stars})
-  var $line = b('hr', $detailsColumn)
-  var $details = b('p', $detailsColumn, n, selectedItem.description)
-  var $button = b('button', $detailsView, {'class': 'btn btn-default back'}, 'BACK')
-  $button.addEventListener('click', function(event) {
-    if (event.target = true) {
-      $detailsView.innerHTML = ''
-      activeView($listView)
-    }
-  })
+  b('h2', $detailsColumn, n, item.name)
+  getStars(item.rating)
+  var $rating = b('img', $detailsColumn, {'src': stars, 'class': 'rating'})
+  var $priceRow = b('div', $detailsColumn, {'class': 'row'})
+  var $priceColumn = b('div', $priceRow, {'class': 'col-xs-6 price-column'})
+  var $dollar = b('h3', $priceColumn, {'class': 'dollar'}, '$')
+  var price = item.price.toFixed(2)
+  var $price = b('h3', $priceColumn, {'class': 'price'}, price)
+  var $addColumn = b('div', $priceRow, {'class': 'col-xs-6'})
+  var $addToCart = b('button', $addColumn, {'class': 'btn btn-default add-cart'}, 'ADD TO CART')
+  customizeAddToCartButton(id)
+  b('hr', $detailsColumn)
+  b('p', $detailsColumn, n, item.description)
 }
 
 function renderImageView(image) {
   var $row = b('div', $imageView, {'class': 'row'})
   var $column = b('div', $row, {'class': 'col-xs-12'})
   var $image = b('img', $column, {'src': image})
-  $image.addEventListener('click', function(event) {
-    if (event.target = true) {
-      activeView($detailsView)
-      $imageView.innerHTML = ''
+  makeClickable($image, $detailsView, false)
+}
+
+function renderCartView() {
+  var $row = b('div', $cartView, {'class': 'row'})
+  var $column = b('div', $row, {'class': 'col-xs-12'})
+  var $shopping = b('h1', $column, {'id': 'shopping'}, 'Shopping Cart')
+  b('hr', $column, {'id': 'shopping-line'})
+  if (itemCount < 1) {
+    $shopping.textContent = 'Your cart is empty.'
+  }
+  else {
+    renderCartItems()
+  }
+}
+
+function renderCartItems() {
+  cart.forEach(function(object) {
+    for (var property in object) {
+      if (property === 'quantity') {
+        if (object[property] > 0) {
+          var quantity = object[property]
+          var render = true
+        }
+      }
+      if (property === 'id') {
+        var id = object[property]
+      }
+    }
+    if (render === true) {
+      var item = getItem(id)
+      var $row = b('div', $cartView, {'class': 'row'})
+      var $imageColumn = b('div', $row, {'class': 'col-xs-2'})
+      var $image = b('img', $imageColumn, {'src': item.image, 'class': 'cart image'})
+      makeClickable($image, $detailsView, true, item.id)
+      var $nameColumn = b('div', $row, {'class': 'col-xs-7'})
+      var $name = b('h3', $nameColumn, n, item.name)
+      makeClickable($name, $detailsView, true, item.id)
+      var $priceColumn = b('div', $row, {'class': 'col-xs-1 cart price-column'})
+      var price = item.price.toFixed(2)
+      var $price = b('h3', $priceColumn, {'class': 'price'}, price)
+      b('span', $price, n, '$', 'afterbegin')
+      var $quantityColumn = b('div', $row, {'class': 'col-xs-1 quantity-column'})
+      var $quantity = b('h3', $quantityColumn, {'class': 'quantity'}, quantity)
+      b('span', $quantity, n, 'x', 'afterbegin')
+      b('hr', $row, {'class': 'cart hr'}, n, 'afterend')
+      var $editQuantityColumn = b('div', $row, {'class': 'col-xs-1 edit-quantity'})
+      var $minusSpan = b('span', $editQuantityColumn)
+      var $minus = b('h2', $minusSpan, {'class': 'minus'}, '-')
+      makeClickable($minus, n, false, id, 'minus')
+      var $plusSpan = b('span', $editQuantityColumn)
+      var $plus = b('h2', $plusSpan, {'class': 'plus'}, '+')
+      makeClickable($plus, n, false, id, 'plus')
     }
   })
 }
 
-var selectedItem
+var views = [
+  $listView = document.querySelector('#list'),
+  $detailsView = document.querySelector('#details'),
+  $imageView = document.querySelector('#image'),
+  $cartView = document.querySelector('#cart'),
+  $checkoutView = document.querySelector('#checkout')
+]
+
 var n = undefined
 var b = buildElement
+var twirling = false
+var promoUp = false
+var itemCount = 0
+var currentView = $listView
+var $cartButton = document.querySelector('#cart-button')
+makeClickable($cartButton, $cartView, true)
+var $itemCount = document.querySelector('#item-count')
+makeClickable($itemCount, $cartView, true)
+var $name = document.querySelector('#name')
+makeClickable($name, $listView, false)
+var $ex1 = document.querySelector('#ex1')
+makeClickable($ex1, $listView, false)
+
+preloadExs(0)
 renderListView()
+buildBackButton()
