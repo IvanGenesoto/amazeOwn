@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-multi-str */
 
-var exs = []
+var logoFrames = []
 var browsingHistory = []
 var cart = []
 
