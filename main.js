@@ -22,7 +22,6 @@ var views = [
   $confirmationView
 ]
 
-var results = []
 var c = createElement
 var twirling = false
 var promoUp = false
@@ -265,6 +264,7 @@ function renderListView() {
 }
 
 function search(string) {
+  var results = []
   items.forEach(function (item) {
     var itemNameLower = item.name.toLowerCase()
     var stringLower = string.toLowerCase()
@@ -272,9 +272,10 @@ function search(string) {
       results.push(item)
     }
   })
+  return results
 }
 
-function renderSearchView() {
+function renderSearchView(results) {
   var $row
   var itemsInRow = 0
   results.forEach(function (item) {
@@ -600,8 +601,8 @@ function listen() {
     browsingHistory.push(currentView)
     $searchView.innerHTML = ''
     var $searchForm = document.querySelector('#search-form')
-    search($searchForm.value)
-    renderSearchView()
+    var results = search($searchForm.value)
+    renderSearchView(results)
     activateView($searchView)
   })
 }
