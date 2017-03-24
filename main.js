@@ -1,6 +1,7 @@
 /* global logoFrames cart items browsingHistory */
 
 var $listView = document.querySelector('#list')
+var $searchView = document.querySelector('#search')
 var $detailsView = document.querySelector('#details')
 var $imageView = document.querySelector('#image')
 var $cartView = document.querySelector('#cart')
@@ -12,6 +13,7 @@ var $logoFrame1 = document.querySelector('#logo-frame-1')
 
 var views = [
   $listView,
+  $searchView,
   $detailsView,
   $imageView,
   $cartView,
@@ -20,6 +22,7 @@ var views = [
   $confirmationView
 ]
 
+var results = []
 var c = createElement
 var twirling = false
 var promoUp = false
@@ -261,6 +264,46 @@ function renderListView() {
   })
 }
 
+function search(string) {
+  items.forEach(function (item) {
+    var itemNameLower = item.name.toLowerCase()
+    var stringLower = string.toLowerCase()
+    if (itemNameLower.search(stringLower) !== -1) {
+      results.push(item)
+    }
+  })
+}
+
+function renderSearchView() {
+  var $row
+  var itemsInRow = 0
+  results.forEach(function (item) {
+    function buildRow() {
+      $row = c('div', {'class': 'row'})
+      $searchView.appendChild($row)
+      var $line = c('hr')
+      $searchView.appendChild($line)
+    }
+    function buildColumn() {
+      var price = item.price.toFixed(2)
+      var stars = getStars(item.rating)
+      var $column = c('div', {'class': 'col-xs-4 item', 'data-id': item.id}, [
+        c('img', {'class': 'list image', 'src': item.image, 'data-id': item.id}),
+        c('h3', {'data-id': item.id}, item.name),
+        c('h3', {'class': 'dollar', 'data-id': item.id}, '$'),
+        c('h3', {'class': 'price', 'data-id': item.id}, price),
+        c('img', {'src': stars, 'class': 'rating', 'data-id': item.id})
+      ])
+      $row.appendChild($column)
+      itemsInRow += 1
+    }
+    if (itemsInRow === 0 || itemsInRow % 3 === 0) {
+      buildRow()
+    }
+    buildColumn()
+  })
+}
+
 function renderDetailsView(item) {
   var price = item.price.toFixed(2)
   var stars = getStars(item.rating)
@@ -468,6 +511,14 @@ function listen() {
     renderDetailsView(item)
     activateView($detailsView)
   })
+  $searchView.addEventListener('click', function (event) {
+    browsingHistory.push(currentView)
+    var id = event.target.getAttribute('data-id')
+    var item = getItem(id)
+    $detailsView.innerHTML = ''
+    renderDetailsView(item)
+    activateView($detailsView)
+  })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'details image') {
       $imageView.innerHTML = ''
@@ -543,6 +594,15 @@ function listen() {
       browsingHistory.push(currentView)
       activateView($listView)
     }
+  })
+  $nav.addEventListener('submit', function (event) {
+    event.preventDefault()
+    browsingHistory.push(currentView)
+    $searchView.innerHTML = ''
+    var $searchForm = document.querySelector('#search-form')
+    search($searchForm.value)
+    renderSearchView()
+    activateView($searchView)
   })
 }
 
