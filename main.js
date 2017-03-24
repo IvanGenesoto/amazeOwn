@@ -5,6 +5,8 @@ var $detailsView = document.querySelector('#details')
 var $imageView = document.querySelector('#image')
 var $cartView = document.querySelector('#cart')
 var $checkoutView = document.querySelector('#checkout')
+var $confirmOrderView = document.querySelector('#confirm-order')
+var $confirmationView = document.querySelector('#confirmation')
 var $nav = document.querySelector('#nav')
 var $logoFrame1 = document.querySelector('#logo-frame-1')
 
@@ -13,13 +15,16 @@ var views = [
   $detailsView,
   $imageView,
   $cartView,
-  $checkoutView
+  $checkoutView,
+  $confirmOrderView,
+  $confirmationView
 ]
 
 var c = createElement
 var twirling = false
 var promoUp = false
 var itemCount = 0
+var orderTotal = 0
 var currentView = $listView
 
 function preloadLogoFrames(frame) {
@@ -27,7 +32,7 @@ function preloadLogoFrames(frame) {
     frame += 1
     var logoFrameID = 'logo-frame-' + frame
     var logoFrame = 'logo-frame/' + frame + '.png'
-    var $logoFrame = createElement('img', {'class': 'logoFrame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    var $logoFrame = createElement('img', {'class': 'logo-frame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     logoFrames.push($logoFrame)
     preloadLogoFrames(frame)
   }
@@ -121,7 +126,7 @@ function renderPromo() {
   var promoText = 'You\'re quick! Use promo code CAUGHTME for 15% off.'
   var $promo = c('div', {'class': 'modal fade bs-example-modal-sm', 'tabindex': '-1', 'role': 'dialog', 'aria-labelledby': 'mySmallModalLabel'}, [
     c('div', {'class': 'modal-dialog modal-sm', 'role': 'document'}, [
-      c('div', {'class': 'modal-content'}, promoText)
+      c('div', {'class': 'modal-content text-center'}, promoText)
     ])
   ])
   $nav.insertAdjacentElement('afterbegin', $promo)
@@ -151,19 +156,16 @@ function createBackButton() {
   })
 }
 
-function customizeAddToCartButton(id) {
-  var $addToCart = document.querySelector('.add-cart')
-  $addToCart.addEventListener('mouseover', function(event) {
+function customizeButton(buttonID) {
+  var $button = document.querySelector(buttonID)
+  $button.addEventListener('mouseover', function(event) {
     event.target.style.backgroundColor = '#26c431'
     event.target.style.borderColor = '#208226'
     event.target.style.color = 'white'
   })
-  $addToCart.addEventListener('mouseout', function(event) {
+  $button.addEventListener('mouseout', function(event) {
     event.target.style.backgroundColor = '#f0bc29'
     event.target.style.borderColor = '#96771E'
-  })
-  $addToCart.addEventListener('click', function(event) {
-    addToCart(id)
   })
 }
 
@@ -187,6 +189,18 @@ function updateQuantity(id, plusOrMinus) {
       renderCartView()
     }
   })
+}
+
+function generateConfirmationNumber() {
+  if (document.querySelector('.number')) {
+    var $number = document.querySelector('.number')
+    $number.remove()
+  }
+  var number = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000
+  var $orderPlaced = document.querySelector('#order-placed')
+  var $confirmationNumber = c('h5', {'class': 'number'}, 'Your confirmation number is ' + number)
+  $orderPlaced.appendChild($confirmationNumber)
+  customizeButton('#continue-shopping')
 }
 
 function createElement(tag, attributes, children) {
@@ -263,15 +277,15 @@ function renderDetailsView(item) {
           c('h3', {'class': 'price'}, price)
         ]),
         c('div', {'class': 'col-xs-6'}, [
-          c('button', {'class': 'btn btn-default add-cart'}, 'ADD TO CART')
+          c('button', {'class': 'btn btn-default button', 'id': 'add-cart', 'data-id': item.id}, 'ADD TO CART')
         ])
       ]),
-      c('p', undefined, item.description),
-      c('hr')
+      c('hr'),
+      c('p', undefined, item.description)
     ])
   ])
   $detailsView.appendChild($row)
-  customizeAddToCartButton(item.id)
+  customizeButton('#add-cart', item.id)
 }
 
 function renderImageView(image) {
@@ -293,7 +307,7 @@ function renderCartView() {
     render = true
   }
   var $row = c('div', {'class': 'row'}, [
-    c('div', {'class': 'col-xs-12'}, [
+    c('div', {'class': 'col-xs-12', 'id': 'shopping-column'}, [
       c('h1', {'id': 'shopping'}, title),
       c('hr', {'id': 'shopping-line'})
     ])
@@ -305,12 +319,15 @@ function renderCartView() {
 }
 
 function renderCartItems() {
-  cart.forEach(function(object) {
-    if (object.quantity > 0) {
-      var quantity = object.quantity
-      var id = object.id
-      var item = getItem(id)
+  var preTotal = 0
+  var total
+  cart.forEach(function(cartItem) {
+    if (cartItem.quantity > 0) {
+      var quantity = cartItem.quantity
+      var item = getItem(cartItem.id)
       var price = item.price.toFixed(2)
+      preTotal += item.price * quantity
+      total = preTotal.toFixed(2)
       var $row = c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-2'}, [
           c('img', {'src': item.image, 'class': 'cart image', 'data-id': item.id})
@@ -343,6 +360,70 @@ function renderCartItems() {
       $cartView.appendChild($row)
     }
   })
+  renderCartTotal(total)
+}
+
+function renderCartTotal(total) {
+  var $shopping = document.querySelector('#shopping')
+  var $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
+  $shopping.appendChild($checkoutButton)
+  customizeButton('#checkout-button')
+  var $cartTotal = c('span', undefined, [
+    'Total:',
+    c('span', undefined, [
+      '$',
+      c('span', undefined, total)
+    ])
+  ])
+  $shopping.appendChild($cartTotal)
+}
+
+function renderConfirmOrder() {
+  var $email = document.querySelector('#form-email')
+  var $name = document.querySelector('#form-name')
+  var $billing = document.querySelector('#form-billing-address')
+  var $shipping = document.querySelector('#form-shipping-address')
+  var $phone = document.querySelector('#form-phone-number')
+  var $credit = document.querySelector('#form-credit-card')
+  var $expiration = document.querySelector('#form-expiration-date')
+  var $ccv = document.querySelector('#form-ccv')
+  var $promo = document.querySelector('#form-promo-code')
+  var $confirmOrder = c('div', {'class': 'row'}, [
+    c('div', {'class': 'col-xs-6 offset-xs-3'}, [
+      c('div', {'class': 'row'}, [
+        c('div', {'class': 'col-xs-12'}, [
+          c('h2', undefined, 'Confirm Order')
+        ])
+      ]),
+      c('div', {'class': 'row'}, [
+        c('div', {'class': 'col-xs-12'}, [
+          c('ul', {'class': 'list-group'}, [
+            c('li', {'class': 'list-group-item'}, 'Email: ' + $email.value),
+            c('li', {'class': 'list-group-item'}, 'Name: ' + $name.value),
+            c('li', {'class': 'list-group-item'}, 'Billing address: ' + $billing.value),
+            c('li', {'class': 'list-group-item'}, 'Shipping address: ' + $shipping.value),
+            c('li', {'class': 'list-group-item'}, 'Phone number: ' + $phone.value),
+            c('li', {'class': 'list-group-item'}, 'Credit card number: ' + $credit.value),
+            c('li', {'class': 'list-group-item'}, 'Expiration date: ' + $expiration.value),
+            c('li', {'class': 'list-group-item'}, 'CCV: ' + $ccv.value),
+            c('li', {'class': 'list-group-item'}, 'Promo code: ' + $promo.value)
+          ])
+        ])
+      ]),
+      c('div', {'class': 'row'}, [
+        c('div', {'class': 'col-xs-12'}, [
+          c('h3', {'class': 'col-xs-12'}, 'Order Total: $' + orderTotal)
+        ])
+      ]),
+      c('div', {'class': 'row'}, [
+        c('div', {'class': 'col-xs-12'}, [
+          c('button', {'class': 'btn btn-default button', 'id': 'confirm-button'}, 'PLACE ORDER')
+        ])
+      ])
+    ])
+  ])
+  $confirmOrderView.appendChild($confirmOrder)
+  customizeButton('#confirm-button')
 }
 
 function listen() {
@@ -356,8 +437,10 @@ function listen() {
   })
   $nav.addEventListener('click', function (event) {
     if (event.target.parentElement.getAttribute('id') === 'logo' || event.target.parentElement.getAttribute('id') === 'name') {
-      browsingHistory.push(currentView)
-      activateView($listView)
+      if (twirling === false) {
+        browsingHistory.push(currentView)
+        activateView($listView)
+      }
     }
   })
   $listView.addEventListener('click', function (event) {
@@ -377,10 +460,17 @@ function listen() {
       activateView($imageView)
     }
   })
+  $detailsView.addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'add-cart') {
+      browsingHistory.push(currentView)
+      var id = event.target.getAttribute('data-id')
+      addToCart(id)
+    }
+  })
   $imageView.addEventListener('click', function () {
     activateView($detailsView)
   })
-  $cartView.addEventListener('click', function(event) {
+  $cartView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'cart-name' || event.target.getAttribute('class') === 'cart image') {
       browsingHistory.push(currentView)
       $detailsView.innerHTML = ''
@@ -390,21 +480,49 @@ function listen() {
       activateView($detailsView)
     }
   })
-  $cartView.addEventListener('click', function(event) {
-    var id = +event.target.getAttribute('data-id')
-    var math = event.target.getAttribute('class')
-    if (math === 'plus' || math === 'minus') {
+  $cartView.addEventListener('click', function (event) {
+    if (event.target.getAttribute('class') === 'plus' || event.target.getAttribute('class') === 'minus') {
+      var id = event.target.getAttribute('data-id')
+      var math = event.target.getAttribute('class')
       updateQuantity(id, math)
     }
   })
-  $nav.addEventListener('click', function(event) {
-    if (event.target.getAttribute('class') === 'ex' || event.target.getAttribute('id') === 'catch-me') {
+  $cartView.addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'checkout-button') {
+      browsingHistory.push(currentView)
+      orderTotal = event.target.getAttribute('data-total')
+      activateView($checkoutView)
+    }
+  })
+  $nav.addEventListener('click', function (event) {
+    if (event.target.getAttribute('class') === 'logo-frame' || event.target.getAttribute('id') === 'catch-me') {
       renderPromo()
+    }
+  })
+  $checkoutView.addEventListener('submit', function (event) {
+    event.preventDefault()
+    browsingHistory.push(currentView)
+    $confirmOrderView.innerHTML = ''
+    renderConfirmOrder()
+    activateView($confirmOrderView)
+  })
+  $confirmOrderView.addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'confirm-button') {
+      browsingHistory.push(currentView)
+      generateConfirmationNumber()
+      activateView($confirmationView)
+    }
+  })
+  $confirmationView.addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'continue-shopping') {
+      browsingHistory.push(currentView)
+      activateView($listView)
     }
   })
 }
 
 preloadLogoFrames(0)
+customizeButton('#submit-button')
 renderListView()
 createBackButton()
 listen()
