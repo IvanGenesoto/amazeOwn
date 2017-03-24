@@ -79,6 +79,15 @@
   z-index: 10;
 }
 
+#search-form {
+  display: inline;
+  position: absolute;
+  width: 300px;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 #cart-container {
   position: relative;
   float: right;
