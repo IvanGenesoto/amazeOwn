@@ -265,10 +265,22 @@ function renderDetailsView(item) {
   var price = item.price.toFixed(2)
   var stars = getStars(item.rating)
   var $row = c('div', {'class': 'row'}, [
-    c('div', {'class': 'col-xs-4'}, [
-      c('img', {'class': 'details image', 'src': item.image, 'data-image': item.image})
+    c('div', {'class': 'col-xs-1'}, [
+      c('div', {'class': 'row'}, [
+        c('div', {'class': 'col-xs-12'}, [
+          c('img', {'class': 'thumbnail image', 'src': item.image2, 'data-image': item.image2})
+        ])
+      ]),
+      c('div', {'class': 'row'}, [
+        c('div', {'class': 'col-xs-12'}, [
+          c('img', {'class': 'thumbnail image', 'src': item.image3, 'data-image': item.image3})
+        ])
+      ])
     ]),
-    c('div', {'class': 'col-xs-8 details'}, [
+    c('div', {'class': 'col-xs-4'}, [
+      c('img', {'class': 'details image', 'id': 'main-image', 'src': item.image, 'data-image': item.image})
+    ]),
+    c('div', {'class': 'col-xs-7 details'}, [
       c('h2', undefined, item.name),
       c('img', {'src': stars, 'class': 'rating'}),
       c('div', {'class': 'row'}, [
@@ -453,11 +465,19 @@ function listen() {
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'details image') {
-      browsingHistory.push(currentView)
       $imageView.innerHTML = ''
-      var image = event.target.getAttribute('data-image')
+      var image = event.target.getAttribute('src')
       renderImageView(image)
       activateView($imageView)
+    }
+  })
+  $detailsView.addEventListener('click', function (event) {
+    if (event.target.getAttribute('class') === 'thumbnail image') {
+      var newImage = event.target.getAttribute('src')
+      var $detailsImage = document.querySelector('.details')
+      var currentImage = $detailsImage.getAttribute('src')
+      $detailsImage.setAttribute('src', newImage)
+      event.target.setAttribute('src', currentImage)
     }
   })
   $detailsView.addEventListener('click', function (event) {
