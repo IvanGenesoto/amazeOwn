@@ -14,7 +14,8 @@ var items = [
     rating: 4.5,
     image: 'https://images-na.ssl-images-amazon.com/images/I/61GW03zyu2L._SL1000_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/71NNRvbcJ9L._SL1200_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/51YTbe98liL._SL1000_.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/51YTbe98liL._SL1000_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/61bzyiw67ZL._SL1200_.jpg'
   },
   {
     id: 8726192,
@@ -24,7 +25,8 @@ var items = [
     rating: 4,
     image: 'https://images-na.ssl-images-amazon.com/images/I/61QA%2BrcoPbL._SL1000_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/61DUI7jlQHL._SL1000_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ePnCmB%2BkL._SL1000_.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ePnCmB%2BkL._SL1000_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/6178nGlWi%2BL._SL1000_.jpg'
   },
   {
     id: 4127349,
@@ -34,7 +36,8 @@ var items = [
     rating: 3,
     image: 'https://images-na.ssl-images-amazon.com/images/I/416kjFQQJOL.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/61rwgeW8ZqL._SL1200_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/61fTUg-HgUL._SL1200_.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/61fTUg-HgUL._SL1200_.jpg',
+    image4: 'http://i.ebayimg.com/images/g/DncAAOSwcUBYS2gT/s-l300.jpg'
   },
   {
     id: 2164276,
@@ -44,7 +47,8 @@ var items = [
     rating: 4,
     image: 'https://images-na.ssl-images-amazon.com/images/I/71M0gwhIlUL._SL1500_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81yw-NJIYLL._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ARG9-Mo6L._SL1500_.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/71ARG9-Mo6L._SL1500_.jpg',
+    image4: 'http://coolgiftsforkidsstore.com/img/wowstar-tri-spinner-fidget-toy-edc-focus-toy-with-hybrid-ceramic-bearing-ultra-durable-non-3d-printed_243401_500.jpg'
   },
   {
     id: 1723643,
@@ -55,7 +59,8 @@ var items = [
     rating: 4.5,
     image: 'https://images-na.ssl-images-amazon.com/images/I/71p56XR7kPL._SL1200_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81okr%2BOTR1L._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/41PSKjURHgL.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/5146HbSfyLL.jpg'
   },
   {
     id: 7891652,
@@ -65,6 +70,73 @@ var items = [
     rating: 4,
     image: 'https://images-na.ssl-images-amazon.com/images/I/81A9LcHa9qL._SL1500_.jpg',
     image2: 'https://images-na.ssl-images-amazon.com/images/I/81b3delkSpL._SL1500_.jpg',
-    image3: 'https://images-na.ssl-images-amazon.com/images/I/81c38ZHgzTL._SL1500_.jpg'
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/81c38ZHgzTL._SL1500_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/81nOF2fKULL._SL1500_.jpg'
+  },
+  {
+    id: 9283504,
+    name: 'Cards Against Humanity',
+    description: 'Cards Against Humanity is a party game for horrible people. Unlike most of the party games you\'ve played before, Cards Against Humanity is as despicable and awkward as you and your friends. The game is simple. Each round, one player asks a question from a Black Card, and everyone else answers with their funniest White Card.',
+    price: 25.00,
+    rating: 5,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/811zWwDM7kL._SL1500_.jpg',
+    image2: 'https://images-na.ssl-images-amazon.com/images/I/81Djp0z0Z1L._SL1500_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/81z8pwsHMnL._SL1500_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/31%2B9ge9CbRL.jpg'
+  },
+  {
+    id: 2093847,
+    name: 'Play-Doh 10-Pack of Colors (Amazon Exclusive)',
+    description: 'With 10 different colors of modeling compound to play with, this is a case of creative possibilities! It’s a rainbow assortment of compound colors that lets you create just about anything you can imagine. Press, smoosh, squish, roll, squeeze and shape – with Play-Doh modeling compound, the only limit is your imagination! Play-Doh and all related characters are trademarks of Hasbro.',
+    price: 7.99,
+    rating: 4,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/81DiLRLm2iL._SL1500_.jpg',
+    image2: 'https://images-na.ssl-images-amazon.com/images/I/81vdraggATL._SL1500_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/31trsWpIIjL.jpg',
+    image4: 'http://freebies2deals.com/wp-content/uploads/2013/11/freebies2deals-case-of-colors-deal.jpg'
+  },
+  {
+    id: 5208932,
+    name: 'Nerf N-Strike Elite Strongarm Blaster',
+    description: 'Designed for quick draws and fast firing, the N-Strike Elite Strongarm blaster puts elite battle performance in the palm of your hand. When speed and mobility are essential, this is the ultimate blaster. The rotating barrel holds 6 darts and the Slam Fire slide lets you blast as fast as you can fire.',
+    price: 12.99,
+    rating: 4.5,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/71T63QicO8L._SL1500_.jpg',
+    image2: 'https://images-na.ssl-images-amazon.com/images/I/81dVcADREQL._SL1500_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/71X4hX0audL._SL1500_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/31ikajN97ZL.jpg'
+  },
+  {
+    id: 9692835,
+    name: 'Crayola Color Bath Dropz 3.59 Ounce (60 Tablets)',
+    description: 'The Crayola Bath product line brings the color, fun, creativity and imagination of the Crayola brand to bath time. Crayola Bath Dropz are fizzing water color tablets that turn ordinary bath water into colorful, fizzy water. This jar makes up to 45 baths! Mix and match the tints to create all the colors of the rainbow. Color assortment may vary.',
+    price: 6.98,
+    rating: 4.5,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/61BNnZU1iYL._SL1000_.jpg',
+    image2: 'https://images-na.ssl-images-amazon.com/images/I/613rutzD-%2BL._SL1000_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/71sVXmC%2BjcL._SY355_.jpg',
+    image4: 'https://i5.walmartimages.com/asr/c83d3809-4943-47bc-a4ce-c73c5c3a20c9_1.13ec29fb728a0b46417683abf15a3486.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'
+  },
+  {
+    id: 7980233,
+    name: 'Hasbro Pie Face Game',
+    description: 'The hilarious Pie Face game is filled with fun and suspense, and somebody\'s bound to get surprised! Players load the arm with whipped cream (not included) or the included sponge, then take turns sliding their heads through the mask and spinning the spinner. But, watch out! The game unit could go off at any time giving someone a face full of whipped cream! (Whipped cream not included.)',
+    price: 14.49,
+    rating: 4.5,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/61itu15rgzL.jpg',
+    image2: 'https://images-na.ssl-images-amazon.com/images/I/81v7SO9xFdL._SL1500_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/81j0%2B7sbzXL._SL1500_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/71RLg4Mt%2BTL._SL1500_.jpg'
+  },
+  {
+    id: 3948220,
+    name: 'OK to Wake! Alarm Clock & Night-Light',
+    description: 'At bedtime, a soothing yellow night-light comforts children as they fall asleep. In the morning, it glows green when it\'s OK for children to get out of bed! If children wake up before the green light comes on, they know to go back to sleep or quietly play in their room until \'green means go\'!',
+    price: 23.99,
+    rating: 4,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/711z4s%2BXsuL._SL1500_.jpg',
+    image2: 'https://images-na.ssl-images-amazon.com/images/I/81pJ3mONyNL._SL1500_.jpg',
+    image3: 'https://images-na.ssl-images-amazon.com/images/I/61J%2BuCvD8iL._SL1000_.jpg',
+    image4: 'https://images-na.ssl-images-amazon.com/images/I/31e1KCXlUPL.jpg'
   }
 ]
