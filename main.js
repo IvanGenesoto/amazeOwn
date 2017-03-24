@@ -268,17 +268,17 @@ function renderDetailsView(item) {
     c('div', {'class': 'col-xs-1'}, [
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-12'}, [
-          c('img', {'class': 'thumbnail image', 'src': item.image2, 'data-image': item.image2})
+          c('img', {'class': 'thumbnail image', 'src': item.image2})
         ])
       ]),
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-12'}, [
-          c('img', {'class': 'thumbnail image', 'src': item.image3, 'data-image': item.image3})
+          c('img', {'class': 'thumbnail image', 'src': item.image3})
         ])
       ])
     ]),
     c('div', {'class': 'col-xs-4'}, [
-      c('img', {'class': 'details image', 'id': 'main-image', 'src': item.image, 'data-image': item.image})
+      c('img', {'class': 'details image', 'src': item.image})
     ]),
     c('div', {'class': 'col-xs-7 details'}, [
       c('h2', undefined, item.name),
