@@ -274,6 +274,11 @@ function renderDetailsView(item) {
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-12'}, [
           c('img', {'class': 'thumbnail image', 'src': item.image3})
+        ]),
+        c('div', {'class': 'row'}, [
+          c('div', {'class': 'col-xs-12'}, [
+            c('img', {'class': 'thumbnail image', 'src': item.image4})
+          ])
         ])
       ])
     ]),
