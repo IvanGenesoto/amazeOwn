@@ -1,6 +1,7 @@
 /* global logoFrames cart items browsingHistory */
 
 var $listView = document.querySelector('#list')
+var $searchView = document.querySelector('#search')
 var $detailsView = document.querySelector('#details')
 var $imageView = document.querySelector('#image')
 var $cartView = document.querySelector('#cart')
@@ -12,6 +13,7 @@ var $logoFrame1 = document.querySelector('#logo-frame-1')
 
 var views = [
   $listView,
+  $searchView,
   $detailsView,
   $imageView,
   $cartView,
@@ -44,6 +46,18 @@ function activateView($targetView) {
   })
   $targetView.classList.remove('hidden')
   currentView = $targetView
+}
+
+function search(string) {
+  var results = []
+  items.forEach(function (item) {
+    var itemNameLower = item.name.toLowerCase()
+    var stringLower = string.toLowerCase()
+    if (itemNameLower.search(stringLower) !== -1) {
+      results.push(item)
+    }
+  })
+  return results
 }
 
 function getItem(id) {
@@ -231,15 +245,15 @@ function createElement(tag, attributes, children) {
   }
 }
 
-function renderListView() {
+function renderListView(list, view) {
   var $row
   var itemsInRow = 0
-  items.forEach(function (item) {
+  list.forEach(function (item) {
     function buildRow() {
       $row = c('div', {'class': 'row'})
-      $listView.appendChild($row)
+      view.appendChild($row)
       var $line = c('hr')
-      $listView.appendChild($line)
+      view.appendChild($line)
     }
     function buildColumn() {
       var price = item.price.toFixed(2)
@@ -460,7 +474,24 @@ function listen() {
       }
     }
   })
+  $nav.addEventListener('submit', function (event) {
+    event.preventDefault()
+    browsingHistory.push(currentView)
+    $searchView.innerHTML = ''
+    var $searchForm = document.querySelector('#search-form')
+    var results = search($searchForm.value)
+    renderListView(results, $searchView)
+    activateView($searchView)
+  })
   $listView.addEventListener('click', function (event) {
+    browsingHistory.push(currentView)
+    var id = event.target.getAttribute('data-id')
+    var item = getItem(id)
+    $detailsView.innerHTML = ''
+    renderDetailsView(item)
+    activateView($detailsView)
+  })
+  $searchView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
     var id = event.target.getAttribute('data-id')
     var item = getItem(id)
@@ -487,7 +518,6 @@ function listen() {
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'add-cart') {
-      browsingHistory.push(currentView)
       var id = event.target.getAttribute('data-id')
       addToCart(id)
     }
@@ -548,6 +578,6 @@ function listen() {
 
 preloadLogoFrames(0)
 customizeButton('#submit-button')
-renderListView()
+renderListView(items, $listView)
 createBackButton()
 listen()
