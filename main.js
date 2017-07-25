@@ -34,7 +34,7 @@ function preloadLogoFrames(frame) {
     frame += 1
     var logoFrameID = 'logo-frame-' + frame
     var logoFrame = 'images/logo-frame/' + frame + '.png'
-    var $logoFrame = createElement('img', {'class': 'logo-frame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    var $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     logoFrames.push($logoFrame)
     preloadLogoFrames(frame)
   }
