@@ -33,8 +33,8 @@ function preloadLogoFrames(frame) {
   if (frame < 6) {
     frame += 1
     var logoFrameID = 'logo-frame-' + frame
-    var logoFrame = 'logo-frame/' + frame + '.png'
-    var $logoFrame = createElement('img', {'class': 'logo-frame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    var logoFrame = 'images/logo-frame/' + frame + '.png'
+    var $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     logoFrames.push($logoFrame)
     preloadLogoFrames(frame)
   }
@@ -71,7 +71,7 @@ function getItem(id) {
 }
 
 function getStars(rating) {
-  var stars = 'stars/' + rating + '.png'
+  var stars = 'images/stars/' + rating + '.png'
   return stars
 }
 
