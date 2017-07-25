@@ -1,0 +1,33 @@
+{
+  "name": "amazeown",
+  "version": "1.0.0",
+  "description": "An online shopping site for people who want to own amazing things.",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-standard": "^7.0.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "express": "^4.15.3",
+    "htmlhint": "^0.9.13",
+    "stylelint": "^7.9.0",
+    "stylelint-config-standard": "^16.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanGenesoto/amazeown.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanGenesoto/amazeown/issues"
+  },
+  "homepage": "https://github.com/IvanGenesoto/amazeown#readme"
+}
