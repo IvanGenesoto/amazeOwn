@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-multi-str */
 
 var logoFrames = []
 var browsingHistory = []
@@ -53,8 +52,8 @@ var items = [
   {
     id: 1723643,
     name: 'Fat Brain Toys Squigz Deluxe Set',
-    description: 'Squigz are fun little suckers! Apply pressure to two Squigz. Air rushes out and the fun rushes in! Connecting to each other and to any solid, non-porous surface - Squigz are a species all their own. They flex. They stick. They suck people into creativity. Once they take hold, it takes some pull to separate them. When Squigz POP! in protest - you\'ll have to admit. your hands and ears are shamelessly delighted! They are flexible fellows and committed joiners. Squigz and fellow Squigz have one chief enterprise - creating things. Willingly, they assemble to become rockets, vehicles, a cushion for the cat, jewelry. they thrill in uniting as a ginormous octopus or squid. Squigz are scientific sorts - always up for playful experimentation and defying gravity - sticking to bathtubs, windows, school lockers, tabletops, and office desktops. (And they are mannerly guests too - never leaving a trace of their presence.) Playful curiosity. It\'s a whole new gig,\
-    thanks to Squigz.',
+    description: 'Squigz are fun little suckers! Apply pressure to two Squigz. Air rushes out and the fun rushes in! Connecting to each other and to any solid, non-porous surface - Squigz are a species all their own. They flex. They stick. They suck people into creativity. Once they take hold, it takes some pull to separate them. When Squigz POP! in protest - you\'ll have to admit. your hands and ears are shamelessly delighted! They are flexible fellows and committed joiners. Squigz and ' + 'fellow Squigz have one chief enterprise - creating things. Willingly, they assemble to become rockets, vehicles, a cushion for the cat, jewelry. they thrill in uniting as a ginormous octopus or squid. Squigz are scientific sorts - always up for playful experimentation and defying gravity - sticking to bathtubs, windows, school lockers, tabletops, and office desktops. (And they are mannerly guests too - never leaving a trace of their presence.) Playful curiosity. It\'s a whole new gig, ' +
+    'thanks to Squigz.',
     price: 49.95,
     rating: 4.5,
     image: 'https://images-na.ssl-images-amazon.com/images/I/71p56XR7kPL._SL1200_.jpg',
