@@ -12,8 +12,15 @@ app.get('/featured', (req, res) => {
 })
 
 app.get('/items/:id', (req, res) => {
-  const match = data.find(item => item.id === +req.params.id)
+  const id = +req.params.id
+  const match = data.find(item => item.id === id)
   res.json(match)
+})
+
+app.get('/search/:string', (req, res) => {
+  const query = req.params.string
+  const results = data.filter(item => item.name.toLowerCase().search(query) !== -1)
+  res.json(results)
 })
 
 app.listen(3000, () => {
