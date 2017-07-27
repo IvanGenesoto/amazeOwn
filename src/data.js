@@ -1,10 +1,4 @@
-/* eslint-disable no-unused-vars */
-
-var logoFrames = []
-var browsingHistory = []
-var cart = []
-
-var items = [
+module.exports = [
   {
     id: 9823741,
     name: 'D-FantiX Cyclone Boys 3x3 Speed Cube Stickerless Magic Cube 3x3x3 Puzzles Toys (56mm)',
