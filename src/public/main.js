@@ -1,6 +1,5 @@
-/* global logoFrames cart items browsingHistory */
-
-var $listView = document.querySelector('#list')
+var $nav = document.querySelector('#nav')
+var $featuredView = document.querySelector('#featured')
 var $searchView = document.querySelector('#search')
 var $detailsView = document.querySelector('#details')
 var $imageView = document.querySelector('#image')
@@ -8,11 +7,13 @@ var $cartView = document.querySelector('#cart')
 var $checkoutView = document.querySelector('#checkout')
 var $confirmOrderView = document.querySelector('#confirm-order')
 var $confirmationView = document.querySelector('#confirmation')
-var $nav = document.querySelector('#nav')
 var $logoFrame1 = document.querySelector('#logo-frame-1')
+var logoFrames = []
+var browsingHistory = []
+var cart = []
 
 var views = [
-  $listView,
+  $featuredView,
   $searchView,
   $detailsView,
   $imageView,
@@ -26,8 +27,9 @@ var c = createElement
 var twirling = false
 var promoUp = false
 var itemCount = 0
+var total = 0
 var orderTotal = 0
-var currentView = $listView
+var currentView = $featuredView
 
 function preloadLogoFrames(frame) {
   if (frame < 6) {
@@ -46,28 +48,6 @@ function activateView($targetView) {
   })
   $targetView.classList.remove('hidden')
   currentView = $targetView
-}
-
-function search(string) {
-  var results = []
-  items.forEach(function (item) {
-    var itemNameLower = item.name.toLowerCase()
-    var stringLower = string.toLowerCase()
-    if (itemNameLower.search(stringLower) !== -1) {
-      results.push(item)
-    }
-  })
-  return results
-}
-
-function getItem(id) {
-  var match
-  items.forEach(function(item) {
-    if (item.id === +id) {
-      match = item
-    }
-  })
-  return match
 }
 
 function getStars(rating) {
@@ -245,9 +225,28 @@ function createElement(tag, attributes, children) {
   }
 }
 
+function goToSearchResults(string) {
+  fetch('/search/' + string.toLowerCase())
+    .then(parse)
+    .then(renderSearchView)
+    .then(activateView($searchView))
+}
+
+function goToDetails(id) {
+  fetch('/items/' + id)
+    .then(parse)
+    .then(renderDetailsView)
+    .then(activateView($detailsView))
+}
+
+function renderSearchView(results) {
+  renderListView(results, $searchView)
+}
+
 function renderListView(list, view) {
   var $row
   var itemsInRow = 0
+  if (!view) view = $featuredView
   list.forEach(function (item) {
     function buildRow() {
       $row = c('div', {'class': 'row'})
@@ -316,7 +315,7 @@ function renderDetailsView(item) {
     ])
   ])
   $detailsView.appendChild($row)
-  customizeButton('#add-cart', item.id)
+  customizeButton('#add-cart')
 }
 
 function renderImageView(image) {
@@ -350,51 +349,61 @@ function renderCartView() {
 }
 
 function renderCartItems() {
-  var preTotal = 0
-  var total
-  cart.forEach(function(cartItem) {
-    if (cartItem.quantity > 0) {
-      var quantity = cartItem.quantity
-      var item = getItem(cartItem.id)
-      var price = item.price.toFixed(2)
-      preTotal += item.price * quantity
-      total = preTotal.toFixed(2)
-      var $row = c('div', {'class': 'row'}, [
-        c('div', {'class': 'col-xs-2'}, [
-          c('img', {'src': item.image, 'class': 'cart image', 'data-id': item.id})
-        ]),
-        c('div', {'class': 'col-xs-7'}, [
-          c('h3', {'class': 'cart-name', 'data-id': item.id}, item.name)
-        ]),
-        c('div', {'class': 'col-xs-1 cart price-column', 'data-id': item.id}, [
-          c('h3', {'class': 'price'}, [
-            c('span', undefined, '$'),
-            price
-          ])
-        ]),
-        c('div', {'class': 'col-xs-1 quantity-column'}, [
-          c('h3', {'class': 'quantity'}, [
-            quantity,
-            c('span', undefined, 'x')
-          ])
-        ]),
-        c('div', {'class': 'col-xs-1 edit-quantity'}, [
-          c('span', undefined, [
-            c('h2', {'class': 'minus', 'data-id': item.id}, '-')
-          ]),
-          c('span', undefined, [
-            c('h2', {'class': 'plus', 'data-id': item.id}, '+')
-          ])
-        ]),
-        c('hr', {'class': 'cart hr'})
-      ])
-      $cartView.appendChild($row)
+  total = 0
+  cart.forEach(function(item) {
+    function quantify(cartItem) {
+      cartItem.quantity = item.quantity
+      return cartItem
     }
+    fetch('/items/' + item.id)
+      .then(parse)
+      .then(quantify)
+      .then(renderCartItem)
+      .then(renderCartTotal)
   })
-  renderCartTotal(total)
 }
 
-function renderCartTotal(total) {
+function renderCartItem(item) {
+  if (item.quantity > 0) {
+    var quantity = item.quantity
+    var price = item.price.toFixed(2)
+    var $row = c('div', {'class': 'row'}, [
+      c('div', {'class': 'col-xs-2'}, [
+        c('img', {'src': item.image, 'class': 'cart image', 'data-id': item.id})
+      ]),
+      c('div', {'class': 'col-xs-7'}, [
+        c('h3', {'class': 'cart-name', 'data-id': item.id}, item.name)
+      ]),
+      c('div', {'class': 'col-xs-1 cart price-column', 'data-id': item.id}, [
+        c('h3', {'class': 'price'}, [
+          c('span', undefined, '$'),
+          price
+        ])
+      ]),
+      c('div', {'class': 'col-xs-1 quantity-column'}, [
+        c('h3', {'class': 'quantity'}, [
+          quantity,
+          c('span', undefined, 'x')
+        ])
+      ]),
+      c('div', {'class': 'col-xs-1 edit-quantity'}, [
+        c('span', undefined, [
+          c('h2', {'class': 'minus', 'data-id': item.id}, '-')
+        ]),
+        c('span', undefined, [
+          c('h2', {'class': 'plus', 'data-id': item.id}, '+')
+        ])
+      ]),
+      c('hr', {'class': 'cart hr'})
+    ])
+    $cartView.appendChild($row)
+    return item
+  }
+}
+
+function renderCartTotal(item) {
+  total += item.price * item.quantity
+  total = total.toFixed(2)
   var $shopping = document.querySelector('#shopping')
   var $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
   $shopping.appendChild($checkoutButton)
@@ -470,7 +479,7 @@ function listen() {
     if (event.target.parentElement.getAttribute('id') === 'logo' || event.target.parentElement.getAttribute('id') === 'name') {
       if (twirling === false) {
         browsingHistory.push(currentView)
-        activateView($listView)
+        activateView($featuredView)
       }
     }
   })
@@ -479,25 +488,19 @@ function listen() {
     browsingHistory.push(currentView)
     $searchView.innerHTML = ''
     var $searchForm = document.querySelector('#search-form')
-    var results = search($searchForm.value)
-    renderListView(results, $searchView)
-    activateView($searchView)
+    goToSearchResults($searchForm.value)
   })
-  $listView.addEventListener('click', function (event) {
+  $featuredView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
-    var id = event.target.getAttribute('data-id')
-    var item = getItem(id)
     $detailsView.innerHTML = ''
-    renderDetailsView(item)
-    activateView($detailsView)
+    var id = event.target.getAttribute('data-id')
+    if (id) goToDetails(id)
   })
   $searchView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
-    var id = event.target.getAttribute('data-id')
-    var item = getItem(id)
     $detailsView.innerHTML = ''
-    renderDetailsView(item)
-    activateView($detailsView)
+    var id = event.target.getAttribute('data-id')
+    if (id) goToDetails(id)
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'details image') {
@@ -530,9 +533,7 @@ function listen() {
       browsingHistory.push(currentView)
       $detailsView.innerHTML = ''
       var id = event.target.getAttribute('data-id')
-      var item = getItem(id)
-      renderDetailsView(item)
-      activateView($detailsView)
+      goToDetails(id)
     }
   })
   $cartView.addEventListener('click', function (event) {
@@ -571,13 +572,19 @@ function listen() {
   $confirmationView.addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'continue-shopping') {
       browsingHistory.push(currentView)
-      activateView($listView)
+      activateView($featuredView)
     }
   })
 }
 
+function parse(response) {
+  return response.json()
+}
+
 preloadLogoFrames(0)
 customizeButton('#submit-button')
-renderListView(items, $listView)
+fetch('/featured')
+  .then(parse)
+  .then(renderListView)
 createBackButton()
 listen()
