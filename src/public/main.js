@@ -29,6 +29,7 @@ var c = createElement
 var twirling = false
 var promoUp = false
 var itemCount = 0
+var total = 0
 var orderTotal = 0
 var currentView = $listView
 
@@ -61,16 +62,6 @@ function search(string) {
     }
   })
   return results
-}
-
-function getItem(id) {
-  var match
-  items.forEach(function(item) {
-    if (item.id === +id) {
-      match = item
-    }
-  })
-  return match
 }
 
 function getStars(rating) {
@@ -279,6 +270,13 @@ function renderListView(list, view) {
   })
 }
 
+function goToDetails(id) {
+  fetch('/items/' + id)
+    .then(parse)
+    .then(renderDetailsView)
+    .then(activateView($detailsView))
+}
+
 function renderDetailsView(item) {
   var price = item.price.toFixed(2)
   var stars = getStars(item.rating)
@@ -320,7 +318,7 @@ function renderDetailsView(item) {
     ])
   ])
   $detailsView.appendChild($row)
-  customizeButton('#add-cart', item.id)
+  customizeButton('#add-cart')
 }
 
 function renderImageView(image) {
@@ -354,51 +352,61 @@ function renderCartView() {
 }
 
 function renderCartItems() {
-  var preTotal = 0
-  var total
-  cart.forEach(function(cartItem) {
-    if (cartItem.quantity > 0) {
-      var quantity = cartItem.quantity
-      var item = getItem(cartItem.id)
-      var price = item.price.toFixed(2)
-      preTotal += item.price * quantity
-      total = preTotal.toFixed(2)
-      var $row = c('div', {'class': 'row'}, [
-        c('div', {'class': 'col-xs-2'}, [
-          c('img', {'src': item.image, 'class': 'cart image', 'data-id': item.id})
-        ]),
-        c('div', {'class': 'col-xs-7'}, [
-          c('h3', {'class': 'cart-name', 'data-id': item.id}, item.name)
-        ]),
-        c('div', {'class': 'col-xs-1 cart price-column', 'data-id': item.id}, [
-          c('h3', {'class': 'price'}, [
-            c('span', undefined, '$'),
-            price
-          ])
-        ]),
-        c('div', {'class': 'col-xs-1 quantity-column'}, [
-          c('h3', {'class': 'quantity'}, [
-            quantity,
-            c('span', undefined, 'x')
-          ])
-        ]),
-        c('div', {'class': 'col-xs-1 edit-quantity'}, [
-          c('span', undefined, [
-            c('h2', {'class': 'minus', 'data-id': item.id}, '-')
-          ]),
-          c('span', undefined, [
-            c('h2', {'class': 'plus', 'data-id': item.id}, '+')
-          ])
-        ]),
-        c('hr', {'class': 'cart hr'})
-      ])
-      $cartView.appendChild($row)
+  total = 0
+  cart.forEach(function(item) {
+    function quantify(cartItem) {
+      cartItem.quantity = item.quantity
+      return cartItem
     }
+    fetch('/items/' + item.id)
+      .then(parse)
+      .then(quantify)
+      .then(renderCartItem)
+      .then(renderCartTotal)
   })
-  renderCartTotal(total)
 }
 
-function renderCartTotal(total) {
+function renderCartItem(item) {
+  if (item.quantity > 0) {
+    var quantity = item.quantity
+    var price = item.price.toFixed(2)
+    var $row = c('div', {'class': 'row'}, [
+      c('div', {'class': 'col-xs-2'}, [
+        c('img', {'src': item.image, 'class': 'cart image', 'data-id': item.id})
+      ]),
+      c('div', {'class': 'col-xs-7'}, [
+        c('h3', {'class': 'cart-name', 'data-id': item.id}, item.name)
+      ]),
+      c('div', {'class': 'col-xs-1 cart price-column', 'data-id': item.id}, [
+        c('h3', {'class': 'price'}, [
+          c('span', undefined, '$'),
+          price
+        ])
+      ]),
+      c('div', {'class': 'col-xs-1 quantity-column'}, [
+        c('h3', {'class': 'quantity'}, [
+          quantity,
+          c('span', undefined, 'x')
+        ])
+      ]),
+      c('div', {'class': 'col-xs-1 edit-quantity'}, [
+        c('span', undefined, [
+          c('h2', {'class': 'minus', 'data-id': item.id}, '-')
+        ]),
+        c('span', undefined, [
+          c('h2', {'class': 'plus', 'data-id': item.id}, '+')
+        ])
+      ]),
+      c('hr', {'class': 'cart hr'})
+    ])
+    $cartView.appendChild($row)
+    return item
+  }
+}
+
+function renderCartTotal(item) {
+  total += item.price * item.quantity
+  total = total.toFixed(2)
   var $shopping = document.querySelector('#shopping')
   var $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
   $shopping.appendChild($checkoutButton)
@@ -489,11 +497,9 @@ function listen() {
   })
   $listView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
-    var id = event.target.getAttribute('data-id')
-    var item = getItem(id)
     $detailsView.innerHTML = ''
-    renderDetailsView(item)
-    activateView($detailsView)
+    var id = event.target.getAttribute('data-id')
+    goToDetails(id)
   })
   $searchView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
@@ -534,9 +540,7 @@ function listen() {
       browsingHistory.push(currentView)
       $detailsView.innerHTML = ''
       var id = event.target.getAttribute('data-id')
-      var item = getItem(id)
-      renderDetailsView(item)
-      activateView($detailsView)
+      goToDetails(id)
     }
   })
   $cartView.addEventListener('click', function (event) {
@@ -580,17 +584,13 @@ function listen() {
   })
 }
 
-function getFeatured() {
-  return fetch('/featured')
-}
-
 function parse(response) {
   return response.json()
 }
 
 preloadLogoFrames(0)
 customizeButton('#submit-button')
-getFeatured()
+fetch('/featured')
   .then(parse)
   .then(renderListView)
 createBackButton()
