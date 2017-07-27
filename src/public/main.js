@@ -1,6 +1,5 @@
-/* global items */
-
-var $listView = document.querySelector('#list')
+var $nav = document.querySelector('#nav')
+var $featuredView = document.querySelector('#featured')
 var $searchView = document.querySelector('#search')
 var $detailsView = document.querySelector('#details')
 var $imageView = document.querySelector('#image')
@@ -8,14 +7,13 @@ var $cartView = document.querySelector('#cart')
 var $checkoutView = document.querySelector('#checkout')
 var $confirmOrderView = document.querySelector('#confirm-order')
 var $confirmationView = document.querySelector('#confirmation')
-var $nav = document.querySelector('#nav')
 var $logoFrame1 = document.querySelector('#logo-frame-1')
 var logoFrames = []
 var browsingHistory = []
 var cart = []
 
 var views = [
-  $listView,
+  $featuredView,
   $searchView,
   $detailsView,
   $imageView,
@@ -31,7 +29,7 @@ var promoUp = false
 var itemCount = 0
 var total = 0
 var orderTotal = 0
-var currentView = $listView
+var currentView = $featuredView
 
 function preloadLogoFrames(frame) {
   if (frame < 6) {
@@ -50,18 +48,6 @@ function activateView($targetView) {
   })
   $targetView.classList.remove('hidden')
   currentView = $targetView
-}
-
-function search(string) {
-  var results = []
-  items.forEach(function (item) {
-    var itemNameLower = item.name.toLowerCase()
-    var stringLower = string.toLowerCase()
-    if (itemNameLower.search(stringLower) !== -1) {
-      results.push(item)
-    }
-  })
-  return results
 }
 
 function getStars(rating) {
@@ -239,10 +225,28 @@ function createElement(tag, attributes, children) {
   }
 }
 
+function goToSearchResults(string) {
+  fetch('/search/' + string.toLowerCase())
+    .then(parse)
+    .then(renderSearchView)
+    .then(activateView($searchView))
+}
+
+function goToDetails(id) {
+  fetch('/items/' + id)
+    .then(parse)
+    .then(renderDetailsView)
+    .then(activateView($detailsView))
+}
+
+function renderSearchView(results) {
+  renderListView(results, $searchView)
+}
+
 function renderListView(list, view) {
   var $row
   var itemsInRow = 0
-  if (!view) view = $listView
+  if (!view) view = $featuredView
   list.forEach(function (item) {
     function buildRow() {
       $row = c('div', {'class': 'row'})
@@ -268,13 +272,6 @@ function renderListView(list, view) {
     }
     buildColumn()
   })
-}
-
-function goToDetails(id) {
-  fetch('/items/' + id)
-    .then(parse)
-    .then(renderDetailsView)
-    .then(activateView($detailsView))
 }
 
 function renderDetailsView(item) {
@@ -482,7 +479,7 @@ function listen() {
     if (event.target.parentElement.getAttribute('id') === 'logo' || event.target.parentElement.getAttribute('id') === 'name') {
       if (twirling === false) {
         browsingHistory.push(currentView)
-        activateView($listView)
+        activateView($featuredView)
       }
     }
   })
@@ -491,23 +488,19 @@ function listen() {
     browsingHistory.push(currentView)
     $searchView.innerHTML = ''
     var $searchForm = document.querySelector('#search-form')
-    var results = search($searchForm.value)
-    renderListView(results, $searchView)
-    activateView($searchView)
+    goToSearchResults($searchForm.value)
   })
-  $listView.addEventListener('click', function (event) {
+  $featuredView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
     $detailsView.innerHTML = ''
     var id = event.target.getAttribute('data-id')
-    goToDetails(id)
+    if (id) goToDetails(id)
   })
   $searchView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
-    var id = event.target.getAttribute('data-id')
-    var item = getItem(id)
     $detailsView.innerHTML = ''
-    renderDetailsView(item)
-    activateView($detailsView)
+    var id = event.target.getAttribute('data-id')
+    if (id) goToDetails(id)
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'details image') {
@@ -579,7 +572,7 @@ function listen() {
   $confirmationView.addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'continue-shopping') {
       browsingHistory.push(currentView)
-      activateView($listView)
+      activateView($featuredView)
     }
   })
 }
