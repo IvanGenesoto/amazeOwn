@@ -1,4 +1,4 @@
-/* global logoFrames cart items browsingHistory */
+/* global items */
 
 var $listView = document.querySelector('#list')
 var $searchView = document.querySelector('#search')
@@ -10,6 +10,9 @@ var $confirmOrderView = document.querySelector('#confirm-order')
 var $confirmationView = document.querySelector('#confirmation')
 var $nav = document.querySelector('#nav')
 var $logoFrame1 = document.querySelector('#logo-frame-1')
+var logoFrames = []
+var browsingHistory = []
+var cart = []
 
 var views = [
   $listView,
@@ -248,6 +251,7 @@ function createElement(tag, attributes, children) {
 function renderListView(list, view) {
   var $row
   var itemsInRow = 0
+  if (!view) view = $listView
   list.forEach(function (item) {
     function buildRow() {
       $row = c('div', {'class': 'row'})
@@ -576,8 +580,18 @@ function listen() {
   })
 }
 
+function getFeatured() {
+  return fetch('/featured')
+}
+
+function parse(response) {
+  return response.json()
+}
+
 preloadLogoFrames(0)
 customizeButton('#submit-button')
-renderListView(items, $listView)
+getFeatured()
+  .then(parse)
+  .then(renderListView)
 createBackButton()
 listen()

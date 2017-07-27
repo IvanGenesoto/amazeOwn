@@ -4,6 +4,7 @@
   "description": "An online shopping site for people who want to own amazing things.",
   "main": "src/index.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3"
   },
   "devDependencies": {
