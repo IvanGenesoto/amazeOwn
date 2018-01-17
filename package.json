@@ -2,12 +2,13 @@
   "name": "amazeown",
   "version": "1.0.0",
   "description": "An online shopping site for people who want to own amazing things.",
-  "main": "src/index.js",
+  "main": "src/server/index.js",
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3"
   },
   "devDependencies": {
+    "browserify": "^14.4.0",
     "eslint": "^3.17.1",
     "eslint-config-standard": "^7.0.1",
     "eslint-plugin-promise": "^3.5.0",
@@ -18,7 +19,9 @@
     "stylelint-config-standard": "^16.0.0"
   },
   "scripts": {
+    "bundle": "browserify src/client/index.js -o src/server/public/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run bundle",
     "start": "node ."
   },
   "repository": {
