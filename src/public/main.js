@@ -24,8 +24,8 @@ var views = [
 ]
 
 var c = createElement
-var twirling = false
-var promoUp = false
+var isTwirling = false
+var promoIsUp = false
 var itemCount = 0
 var total = 0
 var orderTotal = 0
@@ -34,9 +34,9 @@ var currentView = $featuredView
 function preloadLogoFrames(frame) {
   if (frame < 6) {
     frame += 1
-    var logoFrameID = 'logo-frame-' + frame
+    var logoFrameId = 'logo-frame-' + frame
     var logoFrame = 'images/logo-frame/' + frame + '.png'
-    var $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameID, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    var $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameId, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     logoFrames.push($logoFrame)
     preloadLogoFrames(frame)
   }
@@ -56,14 +56,14 @@ function getStars(rating) {
 }
 
 function addToCart(id) {
-  var dupe = false
+  var isDuplicate = false
   cart.forEach(function(item) {
     if (item.id === id) {
       item.quantity += 1
-      dupe = true
+      isDuplicate = true
     }
   })
-  if (!dupe) {
+  if (!isDuplicate) {
     var item = {'id': id, 'quantity': 1}
     cart.push(item)
   }
@@ -74,23 +74,23 @@ function addToCart(id) {
 }
 
 function twirl() {
-  if (twirling === false) {
+  if (isTwirling === false) {
     var $catchMe = c('span', {'id': 'catch-me', 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     var $logo = document.querySelector('#logo')
     $logo.insertAdjacentElement('beforeend', $catchMe)
     forward(1)
   }
   function forward(frame) {
-    twirling = true
+    isTwirling = true
     if (frame > 5) {
       backward(6)
     }
     else {
       frame += 1
-      changeFrames(frame, forward, false)
+      changeFrames(frame, forward)
     }
   }
-  function changeFrames(frame, direction, reverse) {
+  function changeFrames(frame, direction) {
     var $name = document.querySelector('#name')
     var arrayPosition = frame - 1
     var $logoFrame = logoFrames[arrayPosition]
@@ -101,7 +101,7 @@ function twirl() {
   function backward(frame) {
     frame -= 1
     if (frame > 1) {
-      changeFrames(frame, backward, true)
+      changeFrames(frame, backward)
     }
     else {
       var $catchMe = document.querySelector('#catch-me')
@@ -109,7 +109,7 @@ function twirl() {
       var $name = document.querySelector('#name')
       $name.nextElementSibling.remove()
       $name.insertAdjacentElement('afterend', $logoFrame1)
-      twirling = false
+      isTwirling = false
     }
   }
 }
@@ -124,15 +124,15 @@ function renderPromo() {
     ])
   ])
   $nav.insertAdjacentElement('afterbegin', $promo)
-  promoUp = true
+  promoIsUp = true
 }
 
 function removePromo() {
-  if (promoUp === true) {
+  if (promoIsUp === true) {
     var $nav = document.querySelector('#nav')
     var $promo = document.querySelector('.modal')
     $nav.removeChild($promo)
-    promoUp = false
+    promoIsUp = false
   }
 }
 
@@ -150,8 +150,8 @@ function createBackButton() {
   })
 }
 
-function customizeButton(buttonID) {
-  var $button = document.querySelector(buttonID)
+function customizeButton(buttonId) {
+  var $button = document.querySelector(buttonId)
   $button.addEventListener('mouseover', function(event) {
     event.target.style.backgroundColor = '#26c431'
     event.target.style.borderColor = '#208226'
@@ -330,11 +330,11 @@ function renderImageView(image) {
 function renderCartView() {
   if (itemCount < 1) {
     var title = 'Your cart is empty.'
-    var render = false
+    var shouldRender = false
   }
   else {
     title = 'Shopping Cart'
-    render = true
+    shouldRender = true
   }
   var $row = c('div', {'class': 'row'}, [
     c('div', {'class': 'col-xs-12', 'id': 'shopping-column'}, [
@@ -343,7 +343,7 @@ function renderCartView() {
     ])
   ])
   $cartView.appendChild($row)
-  if (render === true) {
+  if (shouldRender === true) {
     renderCartItems()
   }
 }
@@ -477,7 +477,7 @@ function listen() {
   })
   $nav.addEventListener('click', function (event) {
     if (event.target.parentElement.getAttribute('id') === 'logo' || event.target.parentElement.getAttribute('id') === 'name') {
-      if (twirling === false) {
+      if (isTwirling === false) {
         browsingHistory.push(currentView)
         activateView($featuredView)
       }
