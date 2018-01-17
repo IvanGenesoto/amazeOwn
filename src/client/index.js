@@ -1,18 +1,18 @@
-var $nav = document.querySelector('#nav')
-var $featuredView = document.querySelector('#featured')
-var $searchView = document.querySelector('#search')
-var $detailsView = document.querySelector('#details')
-var $imageView = document.querySelector('#image')
-var $cartView = document.querySelector('#cart')
-var $checkoutView = document.querySelector('#checkout')
-var $confirmOrderView = document.querySelector('#confirm-order')
-var $confirmationView = document.querySelector('#confirmation')
-var $logoFrame1 = document.querySelector('#logo-frame-1')
-var logoFrames = []
-var browsingHistory = []
-var cart = []
+const $nav = document.querySelector('#nav')
+const $featuredView = document.querySelector('#featured')
+const $searchView = document.querySelector('#search')
+const $detailsView = document.querySelector('#details')
+const $imageView = document.querySelector('#image')
+const $cartView = document.querySelector('#cart')
+const $checkoutView = document.querySelector('#checkout')
+const $confirmOrderView = document.querySelector('#confirm-order')
+const $confirmationView = document.querySelector('#confirmation')
+const $logoFrame1 = document.querySelector('#logo-frame-1')
+const logoFrames = []
+const browsingHistory = []
+const cart = []
 
-var views = [
+const views = [
   $featuredView,
   $searchView,
   $detailsView,
@@ -23,20 +23,20 @@ var views = [
   $confirmationView
 ]
 
-var c = createElement
-var isTwirling = false
-var promoIsUp = false
-var itemCount = 0
-var total = 0
-var orderTotal = 0
-var currentView = $featuredView
+const c = createElement
+let isTwirling = false
+let promoIsUp = false
+let itemCount = 0
+let total = 0
+let orderTotal = 0
+let currentView = $featuredView
 
 function preloadLogoFrames(frame) {
   if (frame < 6) {
     frame += 1
-    var logoFrameId = 'logo-frame-' + frame
-    var logoFrame = 'images/logo-frame/' + frame + '.png'
-    var $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameId, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    const logoFrameId = 'logo-frame-' + frame
+    const logoFrame = 'images/logo-frame/' + frame + '.png'
+    const $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameId, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     logoFrames.push($logoFrame)
     preloadLogoFrames(frame)
   }
@@ -51,12 +51,12 @@ function activateView($targetView) {
 }
 
 function getStars(rating) {
-  var stars = 'images/stars/' + rating + '.png'
+  const stars = 'images/stars/' + rating + '.png'
   return stars
 }
 
 function addToCart(id) {
-  var isDuplicate = false
+  let isDuplicate = false
   cart.forEach(function(item) {
     if (item.id === id) {
       item.quantity += 1
@@ -64,19 +64,19 @@ function addToCart(id) {
     }
   })
   if (!isDuplicate) {
-    var item = {'id': id, 'quantity': 1}
+    const item = {'id': id, 'quantity': 1}
     cart.push(item)
   }
   itemCount += 1
-  var $itemCount = document.querySelector('#item-count')
+  const $itemCount = document.querySelector('#item-count')
   $itemCount.textContent = itemCount
   twirl()
 }
 
 function twirl() {
   if (isTwirling === false) {
-    var $catchMe = c('span', {'id': 'catch-me', 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
-    var $logo = document.querySelector('#logo')
+    const $catchMe = c('span', {'id': 'catch-me', 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    const $logo = document.querySelector('#logo')
     $logo.insertAdjacentElement('beforeend', $catchMe)
     forward(1)
   }
@@ -91,9 +91,9 @@ function twirl() {
     }
   }
   function changeFrames(frame, direction) {
-    var $name = document.querySelector('#name')
-    var arrayPosition = frame - 1
-    var $logoFrame = logoFrames[arrayPosition]
+    const $name = document.querySelector('#name')
+    const arrayPosition = frame - 1
+    const $logoFrame = logoFrames[arrayPosition]
     $name.nextElementSibling.remove()
     $name.insertAdjacentElement('afterend', $logoFrame)
     window.setTimeout(direction, 41.67, frame)
@@ -104,9 +104,9 @@ function twirl() {
       changeFrames(frame, backward)
     }
     else {
-      var $catchMe = document.querySelector('#catch-me')
+      const $catchMe = document.querySelector('#catch-me')
       $catchMe.remove()
-      var $name = document.querySelector('#name')
+      const $name = document.querySelector('#name')
       $name.nextElementSibling.remove()
       $name.insertAdjacentElement('afterend', $logoFrame1)
       isTwirling = false
@@ -116,9 +116,9 @@ function twirl() {
 
 function renderPromo() {
   removePromo()
-  var $nav = document.querySelector('#nav')
-  var promoText = 'You\'re quick! Use promo code CAUGHTME for 15% off.'
-  var $promo = c('div', {'class': 'modal fade bs-example-modal-sm', 'tabindex': '-1', 'role': 'dialog', 'aria-labelledby': 'mySmallModalLabel'}, [
+  const $nav = document.querySelector('#nav')
+  const promoText = 'You\'re quick! Use promo code CAUGHTME for 15% off.'
+  const $promo = c('div', {'class': 'modal fade bs-example-modal-sm', 'tabindex': '-1', 'role': 'dialog', 'aria-labelledby': 'mySmallModalLabel'}, [
     c('div', {'class': 'modal-dialog modal-sm', 'role': 'document'}, [
       c('div', {'class': 'modal-content text-center'}, promoText)
     ])
@@ -129,21 +129,21 @@ function renderPromo() {
 
 function removePromo() {
   if (promoIsUp === true) {
-    var $nav = document.querySelector('#nav')
-    var $promo = document.querySelector('.modal')
+    const $nav = document.querySelector('#nav')
+    const $promo = document.querySelector('.modal')
     $nav.removeChild($promo)
     promoIsUp = false
   }
 }
 
 function createBackButton() {
-  var $nav = document.querySelector('#nav')
-  var $back = c('button', {'class': 'btn btn-default', 'id': 'back'}, 'BACK')
+  const $nav = document.querySelector('#nav')
+  const $back = c('button', {'class': 'btn btn-default', 'id': 'back'}, 'BACK')
   $nav.appendChild($back)
   $back.addEventListener('click', function(event) {
     if (browsingHistory.length > 0) {
-      var last = browsingHistory.length - 1
-      var previous = browsingHistory[last]
+      const last = browsingHistory.length - 1
+      const previous = browsingHistory[last]
       activateView(previous)
       browsingHistory.splice(last)
     }
@@ -151,7 +151,7 @@ function createBackButton() {
 }
 
 function customizeButton(buttonId) {
-  var $button = document.querySelector(buttonId)
+  const $button = document.querySelector(buttonId)
   $button.addEventListener('mouseover', function(event) {
     event.target.style.backgroundColor = '#26c431'
     event.target.style.borderColor = '#208226'
@@ -166,7 +166,7 @@ function customizeButton(buttonId) {
 function updateQuantity(id, plusOrMinus) {
   cart.forEach(function(object) {
     if (object.id === id) {
-      var $itemCount = document.querySelector('#item-count')
+      const $itemCount = document.querySelector('#item-count')
       if (plusOrMinus === 'plus') {
         object.quantity += 1
         itemCount += 1
@@ -187,20 +187,20 @@ function updateQuantity(id, plusOrMinus) {
 
 function generateConfirmationNumber() {
   if (document.querySelector('.number')) {
-    var $number = document.querySelector('.number')
+    const $number = document.querySelector('.number')
     $number.remove()
   }
-  var number = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000
-  var $orderPlaced = document.querySelector('#order-placed')
-  var $confirmationNumber = c('h5', {'class': 'number'}, 'Your confirmation number is ' + number)
+  const number = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000
+  const $orderPlaced = document.querySelector('#order-placed')
+  const $confirmationNumber = c('h5', {'class': 'number'}, 'Your confirmation number is ' + number)
   $orderPlaced.appendChild($confirmationNumber)
   customizeButton('#continue-shopping')
 }
 
 function createElement(tag, attributes, children) {
-  var $element = document.createElement(tag)
+  const $element = document.createElement(tag)
   if (attributes !== undefined) {
-    for (var key in attributes) {
+    for (const key in attributes) {
       $element.setAttribute(key, attributes[key])
     }
   }
@@ -244,20 +244,20 @@ function renderSearchView(results) {
 }
 
 function renderListView(list, view) {
-  var $row
-  var itemsInRow = 0
+  let $row
+  let itemsInRow = 0
   if (!view) view = $featuredView
   list.forEach(function (item) {
     function buildRow() {
       $row = c('div', {'class': 'row'})
       view.appendChild($row)
-      var $line = c('hr')
+      const $line = c('hr')
       view.appendChild($line)
     }
     function buildColumn() {
-      var price = item.price.toFixed(2)
-      var stars = getStars(item.rating)
-      var $column = c('div', {'class': 'col-xs-4 item', 'data-id': item.id}, [
+      const price = item.price.toFixed(2)
+      const stars = getStars(item.rating)
+      const $column = c('div', {'class': 'col-xs-4 item', 'data-id': item.id}, [
         c('img', {'class': 'list image', 'src': item.image, 'data-id': item.id}),
         c('h3', {'data-id': item.id}, item.name),
         c('h3', {'class': 'dollar', 'data-id': item.id}, '$'),
@@ -275,9 +275,9 @@ function renderListView(list, view) {
 }
 
 function renderDetailsView(item) {
-  var price = item.price.toFixed(2)
-  var stars = getStars(item.rating)
-  var $row = c('div', {'class': 'row'}, [
+  const price = item.price.toFixed(2)
+  const stars = getStars(item.rating)
+  const $row = c('div', {'class': 'row'}, [
     c('div', {'class': 'col-xs-1'}, [
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-12'}, [
@@ -319,7 +319,7 @@ function renderDetailsView(item) {
 }
 
 function renderImageView(image) {
-  var $row = c('div', {'class': 'row'}, [
+  const $row = c('div', {'class': 'row'}, [
     c('div', {'class': 'col-xs-12'}, [
       c('img', {'src': image})
     ])
@@ -336,7 +336,7 @@ function renderCartView() {
     title = 'Shopping Cart'
     shouldRender = true
   }
-  var $row = c('div', {'class': 'row'}, [
+  const $row = c('div', {'class': 'row'}, [
     c('div', {'class': 'col-xs-12', 'id': 'shopping-column'}, [
       c('h1', {'id': 'shopping'}, title),
       c('hr', {'id': 'shopping-line'})
@@ -365,9 +365,9 @@ function renderCartItems() {
 
 function renderCartItem(item) {
   if (item.quantity > 0) {
-    var quantity = item.quantity
-    var price = item.price.toFixed(2)
-    var $row = c('div', {'class': 'row'}, [
+    const quantity = item.quantity
+    const price = item.price.toFixed(2)
+    const $row = c('div', {'class': 'row'}, [
       c('div', {'class': 'col-xs-2'}, [
         c('img', {'src': item.image, 'class': 'cart image', 'data-id': item.id})
       ]),
@@ -404,11 +404,11 @@ function renderCartItem(item) {
 function renderCartTotal(item) {
   total += item.price * item.quantity
   total = total.toFixed(2)
-  var $shopping = document.querySelector('#shopping')
-  var $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
+  const $shopping = document.querySelector('#shopping')
+  const $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
   $shopping.appendChild($checkoutButton)
   customizeButton('#checkout-button')
-  var $cartTotal = c('span', undefined, [
+  const $cartTotal = c('span', undefined, [
     'Total:',
     c('span', undefined, [
       '$',
@@ -419,16 +419,16 @@ function renderCartTotal(item) {
 }
 
 function renderConfirmOrder() {
-  var $email = document.querySelector('#form-email')
-  var $name = document.querySelector('#form-name')
-  var $billing = document.querySelector('#form-billing-address')
-  var $shipping = document.querySelector('#form-shipping-address')
-  var $phone = document.querySelector('#form-phone-number')
-  var $credit = document.querySelector('#form-credit-card')
-  var $expiration = document.querySelector('#form-expiration-date')
-  var $ccv = document.querySelector('#form-ccv')
-  var $promo = document.querySelector('#form-promo-code')
-  var $confirmOrder = c('div', {'class': 'row'}, [
+  const $email = document.querySelector('#form-email')
+  const $name = document.querySelector('#form-name')
+  const $billing = document.querySelector('#form-billing-address')
+  const $shipping = document.querySelector('#form-shipping-address')
+  const $phone = document.querySelector('#form-phone-number')
+  const $credit = document.querySelector('#form-credit-card')
+  const $expiration = document.querySelector('#form-expiration-date')
+  const $ccv = document.querySelector('#form-ccv')
+  const $promo = document.querySelector('#form-promo-code')
+  const $confirmOrder = c('div', {'class': 'row'}, [
     c('div', {'class': 'col-xs-6 offset-xs-3'}, [
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-12'}, [
@@ -487,41 +487,41 @@ function listen() {
     event.preventDefault()
     browsingHistory.push(currentView)
     $searchView.innerHTML = ''
-    var $searchForm = document.querySelector('#search-form')
+    const $searchForm = document.querySelector('#search-form')
     goToSearchResults($searchForm.value)
   })
   $featuredView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
     $detailsView.innerHTML = ''
-    var id = event.target.getAttribute('data-id')
+    const id = event.target.getAttribute('data-id')
     if (id) goToDetails(id)
   })
   $searchView.addEventListener('click', function (event) {
     browsingHistory.push(currentView)
     $detailsView.innerHTML = ''
-    var id = event.target.getAttribute('data-id')
+    const id = event.target.getAttribute('data-id')
     if (id) goToDetails(id)
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'details image') {
       $imageView.innerHTML = ''
-      var image = event.target.getAttribute('src')
+      const image = event.target.getAttribute('src')
       renderImageView(image)
       activateView($imageView)
     }
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'thumbnail image') {
-      var newImage = event.target.getAttribute('src')
-      var $detailsImage = document.querySelector('.details')
-      var currentImage = $detailsImage.getAttribute('src')
+      const newImage = event.target.getAttribute('src')
+      const $detailsImage = document.querySelector('.details')
+      const currentImage = $detailsImage.getAttribute('src')
       $detailsImage.setAttribute('src', newImage)
       event.target.setAttribute('src', currentImage)
     }
   })
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'add-cart') {
-      var id = event.target.getAttribute('data-id')
+      const id = event.target.getAttribute('data-id')
       addToCart(id)
     }
   })
@@ -532,14 +532,14 @@ function listen() {
     if (event.target.getAttribute('class') === 'cart-name' || event.target.getAttribute('class') === 'cart image') {
       browsingHistory.push(currentView)
       $detailsView.innerHTML = ''
-      var id = event.target.getAttribute('data-id')
+      const id = event.target.getAttribute('data-id')
       goToDetails(id)
     }
   })
   $cartView.addEventListener('click', function (event) {
     if (event.target.getAttribute('class') === 'plus' || event.target.getAttribute('class') === 'minus') {
-      var id = event.target.getAttribute('data-id')
-      var math = event.target.getAttribute('class')
+      const id = event.target.getAttribute('data-id')
+      const math = event.target.getAttribute('class')
       updateQuantity(id, math)
     }
   })
