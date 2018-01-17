@@ -199,29 +199,16 @@ function generateConfirmationNumber() {
 
 function createElement(tag, attributes, children) {
   const $element = document.createElement(tag)
-  if (attributes !== undefined) {
-    for (const key in attributes) {
-      $element.setAttribute(key, attributes[key])
-    }
-  }
-  if (children !== undefined) {
-    if (!Array.isArray(children)) {
-      append(children)
-    }
-    else {
-      children.forEach(function (child) {
-        append(child)
-      })
-    }
-  }
-  return $element
-  function append(child) {
-    if (child instanceof Node) {
-      $element.appendChild(child)
-    }
-    else {
-      $element.appendChild(document.createTextNode(child))
-    }
+  if (attributes) Object
+    .entries(attributes)
+    .forEach(([key, value]) => $element.setAttribute(key, value))
+  if (!children) return $element
+  if (Array.isArray(children)) return children.reduce(append, $element)
+  else return append($element, children)
+  function append($element, child) {
+    if (child instanceof Node) $element.appendChild(child)
+    else $element.appendChild(document.createTextNode(child))
+    return $element
   }
 }
 
@@ -299,7 +286,7 @@ function renderDetailsView(item) {
       c('img', {'class': 'details image', 'src': item.image})
     ]),
     c('div', {'class': 'col-xs-7 details'}, [
-      c('h2', undefined, item.name),
+      c('h2', null, item.name),
       c('img', {'src': stars, 'class': 'rating'}),
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-6 price-column'}, [
@@ -311,7 +298,7 @@ function renderDetailsView(item) {
         ])
       ]),
       c('hr'),
-      c('p', undefined, item.description)
+      c('p', null, item.description)
     ])
   ])
   $detailsView.appendChild($row)
@@ -376,21 +363,21 @@ function renderCartItem(item) {
       ]),
       c('div', {'class': 'col-xs-1 cart price-column', 'data-id': item.id}, [
         c('h3', {'class': 'price'}, [
-          c('span', undefined, '$'),
+          c('span', null, '$'),
           price
         ])
       ]),
       c('div', {'class': 'col-xs-1 quantity-column'}, [
         c('h3', {'class': 'quantity'}, [
           quantity,
-          c('span', undefined, 'x')
+          c('span', null, 'x')
         ])
       ]),
       c('div', {'class': 'col-xs-1 edit-quantity'}, [
-        c('span', undefined, [
+        c('span', null, [
           c('h2', {'class': 'minus', 'data-id': item.id}, '-')
         ]),
-        c('span', undefined, [
+        c('span', null, [
           c('h2', {'class': 'plus', 'data-id': item.id}, '+')
         ])
       ]),
@@ -408,11 +395,11 @@ function renderCartTotal(item) {
   const $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
   $shopping.appendChild($checkoutButton)
   customizeButton('#checkout-button')
-  const $cartTotal = c('span', undefined, [
+  const $cartTotal = c('span', null, [
     'Total:',
-    c('span', undefined, [
+    c('span', null, [
       '$',
-      c('span', undefined, total)
+      c('span', null, total)
     ])
   ])
   $shopping.appendChild($cartTotal)
@@ -432,7 +419,7 @@ function renderConfirmOrder() {
     c('div', {'class': 'col-xs-6 offset-xs-3'}, [
       c('div', {'class': 'row'}, [
         c('div', {'class': 'col-xs-12'}, [
-          c('h2', undefined, 'Confirm Order')
+          c('h2', null, 'Confirm Order')
         ])
       ]),
       c('div', {'class': 'row'}, [
