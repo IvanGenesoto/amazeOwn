@@ -1,36 +1,4 @@
-const c = require('./create-element')
-
-const $nav = document.querySelector('#nav')
-const $featuredView = document.querySelector('#featured')
-const $searchView = document.querySelector('#search')
-const $detailsView = document.querySelector('#details')
-const $imageView = document.querySelector('#image')
-const $cartView = document.querySelector('#cart')
-const $checkoutView = document.querySelector('#checkout')
-const $confirmOrderView = document.querySelector('#confirm-order')
-const $confirmationView = document.querySelector('#confirmation')
-const $logoFrame1 = document.querySelector('#logo-frame-1')
-const logoFrames = []
-const browsingHistory = []
-const cart = []
-
-const views = [
-  $featuredView,
-  $searchView,
-  $detailsView,
-  $imageView,
-  $cartView,
-  $checkoutView,
-  $confirmOrderView,
-  $confirmationView
-]
-
-let isTwirling = false
-let promoIsUp = false
-let itemCount = 0
-let total = 0
-let orderTotal = 0
-let currentView = $featuredView
+const state = require('./state')
 
 function preloadLogoFrames(frame) {
   if (frame < 6) {
@@ -374,7 +342,6 @@ function renderCartItem(item) {
 }
 
 function renderCartTotal(item) {
-  console.log(cart);
   total = +total + item.price * item.quantity
   total = total.toFixed(2)
   const $shopping = document.querySelector('#shopping')
