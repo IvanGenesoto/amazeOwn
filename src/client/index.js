@@ -1,4 +1,4 @@
-const state = require('./state')
+const state = require('./state')()
 
 function preloadLogoFrames(frame) {
   if (frame < 6) {
@@ -414,116 +414,8 @@ function renderConfirmOrder() {
   customizeButton('#confirm-button')
 }
 
-function listen() {
-  $nav.addEventListener('click', function (event) {
-    if (event.target.parentElement.getAttribute('id') === 'cart-container') {
-      browsingHistory.push(currentView)
-      $cartView.innerHTML = ''
-      renderCartView()
-      activateView($cartView)
-    }
-  })
-  $nav.addEventListener('click', function (event) {
-    if (event.target.parentElement.getAttribute('id') === 'logo' || event.target.parentElement.getAttribute('id') === 'name') {
-      if (isTwirling === false) {
-        browsingHistory.push(currentView)
-        activateView($featuredView)
-      }
-    }
-  })
-  $nav.addEventListener('submit', function (event) {
-    event.preventDefault()
-    browsingHistory.push(currentView)
-    $searchView.innerHTML = ''
-    const $searchForm = document.querySelector('#search-form')
-    goToSearchResults($searchForm.value)
-  })
-  $featuredView.addEventListener('click', function (event) {
-    browsingHistory.push(currentView)
-    $detailsView.innerHTML = ''
-    const id = event.target.getAttribute('data-id')
-    if (id) goToDetails(id)
-  })
-  $searchView.addEventListener('click', function (event) {
-    browsingHistory.push(currentView)
-    $detailsView.innerHTML = ''
-    const id = event.target.getAttribute('data-id')
-    if (id) goToDetails(id)
-  })
-  $detailsView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('class') === 'details image') {
-      $imageView.innerHTML = ''
-      const image = event.target.getAttribute('src')
-      renderImageView(image)
-      activateView($imageView)
-    }
-  })
-  $detailsView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('class') === 'thumbnail image') {
-      const newImage = event.target.getAttribute('src')
-      const $detailsImage = document.querySelector('.details')
-      const currentImage = $detailsImage.getAttribute('src')
-      $detailsImage.setAttribute('src', newImage)
-      event.target.setAttribute('src', currentImage)
-    }
-  })
-  $detailsView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'add-cart') {
-      const id = event.target.getAttribute('data-id')
-      addToCart(id)
-    }
-  })
-  $imageView.addEventListener('click', function () {
-    activateView($detailsView)
-  })
-  $cartView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('class') === 'cart-name' || event.target.getAttribute('class') === 'cart image') {
-      browsingHistory.push(currentView)
-      $detailsView.innerHTML = ''
-      const id = event.target.getAttribute('data-id')
-      goToDetails(id)
-    }
-  })
-  $cartView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('class') === 'plus' || event.target.getAttribute('class') === 'minus') {
-      const id = event.target.getAttribute('data-id')
-      const math = event.target.getAttribute('class')
-      updateQuantity(id, math)
-    }
-  })
-  $cartView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'checkout-button') {
-      browsingHistory.push(currentView)
-      orderTotal = event.target.getAttribute('data-total')
-      activateView($checkoutView)
-    }
-  })
-  $nav.addEventListener('click', function (event) {
-    if (event.target.getAttribute('class') === 'logo-frame' || event.target.getAttribute('id') === 'catch-me') {
-      renderPromo()
-    }
-  })
-  $checkoutView.addEventListener('submit', function (event) {
-    event.preventDefault()
-    browsingHistory.push(currentView)
-    $confirmOrderView.innerHTML = ''
-    renderConfirmOrder()
-    activateView($confirmOrderView)
-  })
-  $confirmOrderView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'confirm-button') {
-      browsingHistory.push(currentView)
-      generateConfirmationNumber()
-      activateView($confirmationView)
-    }
-  })
-  $confirmationView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'continue-shopping') {
-      browsingHistory.push(currentView)
-      activateView($featuredView)
-    }
-  })
-}
+const listen = require('./listen')
+listen(state)
 
 function parse(response) {
   return response.json()
