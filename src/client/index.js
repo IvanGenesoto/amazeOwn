@@ -1,3 +1,5 @@
+const c = require('./create-element')
+
 const $nav = document.querySelector('#nav')
 const $featuredView = document.querySelector('#featured')
 const $searchView = document.querySelector('#search')
@@ -23,7 +25,6 @@ const views = [
   $confirmationView
 ]
 
-const c = createElement
 let isTwirling = false
 let promoIsUp = false
 let itemCount = 0
@@ -164,24 +165,25 @@ function customizeButton(buttonId) {
 }
 
 function updateQuantity(id, plusOrMinus) {
-  cart.forEach(function(object) {
-    if (object.id === id) {
-      const $itemCount = document.querySelector('#item-count')
-      if (plusOrMinus === 'plus') {
-        object.quantity += 1
-        itemCount += 1
-        $itemCount.textContent = itemCount
-      }
-      else {
-        if (object.quantity > 0) {
-          object.quantity -= 1
-          itemCount -= 1
-          $itemCount.textContent = itemCount
-        }
-      }
-      $cartView.innerHTML = ''
-      renderCartView()
+  cart.forEach(function(item) {
+    if (item.id !== id) return
+    const $itemCount = document.querySelector('#item-count')
+    if (plusOrMinus === 'plus') {
+      item.quantity += 1
+      itemCount += 1
+      $itemCount.textContent = itemCount
     }
+    else if (item.quantity > 1) {
+      item.quantity -= 1
+      itemCount -= 1
+      $itemCount.textContent = itemCount
+    }
+    else {
+      const index = cart.indexOf(item)
+      cart.splice(index)
+    }
+    $cartView.innerHTML = ''
+    renderCartView()
   })
 }
 
@@ -195,21 +197,6 @@ function generateConfirmationNumber() {
   const $confirmationNumber = c('h5', {'class': 'number'}, 'Your confirmation number is ' + number)
   $orderPlaced.appendChild($confirmationNumber)
   customizeButton('#continue-shopping')
-}
-
-function createElement(tag, attributes, children) {
-  const $element = document.createElement(tag)
-  if (attributes) Object
-    .entries(attributes)
-    .forEach(([key, value]) => $element.setAttribute(key, value))
-  if (!children) return $element
-  if (Array.isArray(children)) return children.reduce(append, $element)
-  else return append($element, children)
-  function append($element, child) {
-    if (child instanceof Node) $element.appendChild(child)
-    else $element.appendChild(document.createTextNode(child))
-    return $element
-  }
 }
 
 function goToSearchResults(string) {
@@ -330,9 +317,7 @@ function renderCartView() {
     ])
   ])
   $cartView.appendChild($row)
-  if (shouldRender === true) {
-    renderCartItems()
-  }
+  if (shouldRender) renderCartItems()
 }
 
 function renderCartItems() {
@@ -389,13 +374,22 @@ function renderCartItem(item) {
 }
 
 function renderCartTotal(item) {
-  total += item.price * item.quantity
+  console.log(cart);
+  total = +total + item.price * item.quantity
   total = total.toFixed(2)
   const $shopping = document.querySelector('#shopping')
-  const $checkoutButton = c('button', {'class': 'btn btn-default button cart', 'id': 'checkout-button', 'data-total': total}, 'CHECKOUT')
+  let $checkoutButton = document.querySelector('#checkout-button')
+  if ($checkoutButton) $checkoutButton.remove()
+  $checkoutButton = c('button', {
+    'class': 'btn btn-default button cart',
+    'id': 'checkout-button',
+    'data-total': total
+  }, 'CHECKOUT')
   $shopping.appendChild($checkoutButton)
   customizeButton('#checkout-button')
-  const $cartTotal = c('span', null, [
+  let $cartTotal = document.querySelector('#cart-total')
+  if ($cartTotal) $cartTotal.remove()
+  $cartTotal = c('span', {'id': 'cart-total'}, [
     'Total:',
     c('span', null, [
       '$',
