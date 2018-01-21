@@ -1,5 +1,4 @@
 module.exports = function RenderCartMethods() {
-
   return {
     renderCartItem: require('./item'),
     renderCartItems: require('./items'),

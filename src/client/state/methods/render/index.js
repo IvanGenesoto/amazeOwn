@@ -1,4 +1,4 @@
-module.exports = function RenderMethods() {
+module.exports = function RenderMethods(reducers) {
 
   const renderMethods = {
     renderConfirmOrder: require('./confirm-order'),
@@ -10,8 +10,7 @@ module.exports = function RenderMethods() {
   }
 
   const cartMethods = require('./cart')()
-  return Object.entries(cartMethods).reduce(
-    (renderMethods, [methodName, method]) => (renderMethods[methodName] = method),
-    renderMethods
-  )
+  const {append} = reducers
+
+  return Object.entries(cartMethods).reduce(append, renderMethods)
 }

@@ -1,6 +1,7 @@
 module.exports = function renderCartItems() {
-  const {cart, parse, renderCartItem, renderCartTotal} = this
-  this.total = 0
+  const state = this
+  const {cart, parse, renderCartItem, renderCartTotal} = state
+  state.total = 0
   cart.forEach(function(item) {
     function quantify(cartItem) {
       cartItem.quantity = item.quantity
@@ -9,7 +10,7 @@ module.exports = function renderCartItems() {
     fetch('/items/' + item.id)
       .then(parse)
       .then(quantify)
-      .then(renderCartItem)
-      .then(renderCartTotal)
+      .then(renderCartItem.bind(state))
+      .then(renderCartTotal.bind(state))
   })
 }

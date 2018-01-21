@@ -1,5 +1,5 @@
 module.exports = function activateView($targetView) {
-  let {views} = this
+  const {views} = this
   views.forEach(function (view) {
     view.classList.add('hidden')
   })

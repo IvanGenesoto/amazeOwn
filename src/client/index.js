@@ -1,15 +1,11 @@
 const state = require('./state')()
 
-const {
-  customizeButton,
-  parse,
-  listen
- } = state
+const {renderListView, customizeButton, parse} = state
 
 state.preloadLogoFrames(0)
 customizeButton('#submit-button')
 fetch('/featured')
   .then(parse)
-  .then(state.renderListView)
+  .then(renderListView.bind(state))
 state.createBackButton()
-listen(state)
+state.listen()
