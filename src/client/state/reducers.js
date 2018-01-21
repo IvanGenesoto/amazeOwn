@@ -1,11 +1,11 @@
 module.exports = {
-  appendAll(state, group) {
-    Object.entries(group).reduce(append, state)
-    function append(state, [methodName, method]) {
-      state[methodName] = method
-      return state
-    }
-    return state
+  append(parent, [methodName, method]) {
+    parent[methodName] = method
+    return parent
+  },
+  appendAll(append, parent, group) {
+    Object.entries(group).reduce(append, parent)
+    return parent
   },
   preventWrites(state, key) {
     Object.defineProperty(state, key, {writable: false})

@@ -4,7 +4,13 @@ module.exports = function preloadLogoFrames(frame) {
     frame += 1
     const logoFrameId = 'logo-frame-' + frame
     const logoFrame = 'images/logo-frame/' + frame + '.png'
-    const $logoFrame = c('img', {'class': 'logo-frame', 'id': logoFrameId, 'src': logoFrame, 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+    const $logoFrame = c('img', {
+      'class': 'logo-frame',
+      'id': logoFrameId,
+      'src': logoFrame,
+      'data-target': '.bs-example-modal-sm',
+      'data-toggle': 'modal'
+    })
     logoFrames.push($logoFrame)
     this.preloadLogoFrames(frame)
   }

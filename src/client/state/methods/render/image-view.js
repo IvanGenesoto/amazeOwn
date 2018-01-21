@@ -1,4 +1,4 @@
-module.exorts = function renderImageView(image) {
+module.exports = function renderImageView(image) {
   const {c, $imageView} = this
   const $row = c('div', {'class': 'row'}, [
     c('div', {'class': 'col-xs-12'}, [

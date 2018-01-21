@@ -1,5 +1,5 @@
 module.exports = function renderCartView() {
-  const {c, itemCount, $cartView, renderCartItems} = this
+  const {c, itemCount, $cartView} = this
   if (itemCount < 1) {
     var title = 'Your cart is empty.'
     var shouldRender = false
@@ -15,5 +15,5 @@ module.exports = function renderCartView() {
     ])
   ])
   $cartView.appendChild($row)
-  if (shouldRender) renderCartItems()
+  if (shouldRender) this.renderCartItems()
 }

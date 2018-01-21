@@ -1,9 +1,10 @@
 module.exports = function State() {
 
-  const {appendAll, preventWrites, preventConfiguration} = require('./reducers')
+  const reducers = require('./reducers')
+  const {append, appendAll, preventWrites, preventConfiguration} = reducers
 
-  const groups = [require('./methods')(), require('./elements')]
-  let state = groups.reduce(appendAll, Object.create(null))
+  const groups = [require('./methods')(reducers), require('./elements')]
+  let state = groups.reduce(appendAll.bind(null, append), Object.create(null))
 
   state.views = require('./views')(state)
   state.logoFrames = []
