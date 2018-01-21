@@ -6,8 +6,8 @@
   "rules": {
     "space-before-function-paren": 0,
     "padded-blocks": 0,
-    "curly": ["error", "multi-line"],
-    "brace-style": ["error", "stroustrup"],
+    "curly": 0,
+    "brace-style": ["error", "stroustrup", {"allowSingleLine": true}],
     "react/prop-types": 0
   }
 }
