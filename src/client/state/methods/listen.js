@@ -63,13 +63,12 @@ module.exports = function listen() {
     }
     switch (event.target.getAttribute('class')) {
       case 'details image':
-        browsingHistory.push(state.currentView)
         $imageView.innerHTML = ''
         const image = event.target.getAttribute('src')
         state.renderImageView(image)
         state.activateView($imageView)
         break
-      case 'thumbnail image':
+      case 'thumbnailed image':
         const newImage = event.target.getAttribute('src')
         const $detailsImage = document.querySelector('.details')
         const currentImage = $detailsImage.getAttribute('src')
@@ -79,7 +78,6 @@ module.exports = function listen() {
   })
 
   $imageView.addEventListener('click', function () {
-    browsingHistory.push(state.currentView)
     state.activateView($detailsView)
   })
 
@@ -98,8 +96,8 @@ module.exports = function listen() {
         break
       case 'plus': case 'minus':
         id = event.target.getAttribute('data-id')
-        const math = event.target.getAttribute('class')
-        state.updateQuantity(id, math)
+        const plusOrMinus = event.target.getAttribute('class')
+        state.updateQuantity(id, plusOrMinus)
     }
   })
 

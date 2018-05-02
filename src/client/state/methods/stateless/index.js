@@ -1,5 +1,4 @@
 module.exports = function StatelessMethods() {
-
   return {
     c: require('./create-element'),
     customizeButton: require('./customize-button'),

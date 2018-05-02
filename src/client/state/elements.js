@@ -8,5 +8,5 @@ module.exports = {
   $checkoutView: document.querySelector('#checkout'),
   $confirmOrderView: document.querySelector('#confirm-order'),
   $confirmationView: document.querySelector('#confirmation'),
-  $logoFrame1: document.querySelector('#logo-frame-1')
+  $logoFrame1: document.querySelector('#frame-1')
 }
