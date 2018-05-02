@@ -17,5 +17,5 @@ module.exports = function Methods(reducers) {
   const otherMethods = [require('./render')(reducers), require('./stateless')()]
   const {append, appendAll} = reducers
 
-  return otherMethods.reduce(appendAll.bind(null, append), methods)
+  return otherMethods.reduce(appendAll.bind(append), methods)
 }

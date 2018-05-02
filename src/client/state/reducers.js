@@ -3,16 +3,14 @@ module.exports = {
     parent[methodName] = method
     return parent
   },
-  appendAll(append, parent, group) {
-    Object.entries(group).reduce(append, parent)
-    return parent
+  appendAll(parent, group) {
+    const append = this
+    return Object.entries(group).reduce(append, parent)
   },
   preventWrites(state, key) {
-    Object.defineProperty(state, key, {writable: false})
-    return state
+    return Object.defineProperty(state, key, {writable: false})
   },
   preventConfiguration(state, key) {
-    Object.defineProperty(state, key, {configurable: false})
-    return state
+    return Object.defineProperty(state, key, {configurable: false})
   }
 }
