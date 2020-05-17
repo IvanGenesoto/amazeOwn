@@ -1,25 +1,22 @@
 const express = require('express')
-const app = express()
 const path = require('path')
 const data = require('./data')
+const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.get('/featured', (unusedRequest, response) => response.json(data))
 
-app.get('/featured', (req, res) => {
-  res.json(data)
+app.get('/items/:id', (request, response) => {
+  const id = +request.params.id
+  const item = data.find(item => item.id === id)
+  response.json(item)
 })
 
-app.get('/items/:id', (req, res) => {
-  const id = +req.params.id
-  const match = data.find(item => item.id === id)
-  res.json(match)
-})
-
-app.get('/search/:string', (req, res) => {
-  const query = req.params.string
+app.get('/search/:string', (request, response) => {
+  const query = request.params.string
   const results = data.filter(item => item.name.toLowerCase().search(query) !== -1)
-  res.json(results)
+  response.json(results)
 })
 
 app.listen(port, () => console.log('Listening on port ' + port))
