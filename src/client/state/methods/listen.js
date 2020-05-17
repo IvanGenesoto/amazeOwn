@@ -1,6 +1,7 @@
 module.exports = function listen() {
 
   const state = this
+
   const {
     $nav,
     $featuredView,
@@ -45,20 +46,20 @@ module.exports = function listen() {
   $featuredView.addEventListener('click', function (event) {
     browsingHistory.push(state.currentView)
     $detailsView.innerHTML = ''
-    const id = event.target.getAttribute('data-id')
+    const id = event.target.dataset.id
     if (id) state.goToDetails(id)
   })
 
   $searchView.addEventListener('click', function (event) {
     browsingHistory.push(state.currentView)
     $detailsView.innerHTML = ''
-    const id = event.target.getAttribute('data-id')
+    const id = event.target.dataset.id
     if (id) state.goToDetails(id)
   })
 
   $detailsView.addEventListener('click', function (event) {
     if (event.target.getAttribute('id') === 'add-cart') {
-      const id = event.target.getAttribute('data-id')
+      const id = event.target.dataset.id
       return state.addToCart(id)
     }
     switch (event.target.getAttribute('class')) {
@@ -91,11 +92,11 @@ module.exports = function listen() {
       case 'cart-name': case 'cart image':
         browsingHistory.push(state.currentView)
         $detailsView.innerHTML = ''
-        var id = event.target.getAttribute('data-id')
+        var id = event.target.dataset.id
         state.goToDetails(id)
         break
       case 'plus': case 'minus':
-        id = event.target.getAttribute('data-id')
+        id = event.target.dataset.id
         const plusOrMinus = event.target.getAttribute('class')
         state.updateQuantity(id, plusOrMinus)
     }
