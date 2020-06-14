@@ -1,17 +1,17 @@
-module.exports = function updateQuantity(id, plusOrMinus) {
+module.exports = function updateQuantity(id, isPlus) {
   const state = this
   const {cart, $cartView} = state
   cart.forEach(function(item) {
     if (item.id !== id) return
     const $itemCount = document.querySelector('#item-count')
-    if (plusOrMinus === 'plus') {
-      item.quantity += 1
-      state.itemCount += 1
+    if (isPlus) {
+      ++item.quantity
+      ++state.itemCount
       $itemCount.textContent = state.itemCount
     }
     else if (item.quantity > 1) {
-      item.quantity -= 1
-      state.itemCount -= 1
+      --item.quantity
+      --state.itemCount
       $itemCount.textContent = state.itemCount
     }
     else {

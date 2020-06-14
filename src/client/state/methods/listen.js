@@ -16,23 +16,20 @@ module.exports = function listen() {
     isTwirling
   } = state
 
-  $nav.addEventListener('click', function (event) {
-    if (
-      event.target.getAttribute('class') === 'logo-frame' ||
-      event.target.getAttribute('id') === 'catch-me'
-    ) return state.renderPromo()
-    switch (event.target.parentElement.getAttribute('id')) {
-      case 'cart-container':
-        browsingHistory.push(state.currentView)
-        $cartView.innerHTML = ''
-        state.renderCartView()
-        state.activateView($cartView)
-        break
-      case 'logo': case 'name':
-        if (isTwirling === true) return
-        browsingHistory.push(state.currentView)
-        state.activateView($featuredView)
+  $nav.addEventListener('click', function ({target}) {
+    const id = target.parentElement.getAttribute('id')
+    if (id === 'catch-me') return state.renderPromo()
+    if (id === 'cart-container') {
+      browsingHistory.push(state.currentView)
+      $cartView.innerHTML = ''
+      state.renderCartView()
+      state.activateView($cartView)
+      return
     }
+    if (id !== 'logo' && id !== 'name') return
+    if (isTwirling) return
+    browsingHistory.push(state.currentView)
+    state.activateView($featuredView)
   })
 
   $nav.addEventListener('submit', function (event) {
@@ -43,63 +40,64 @@ module.exports = function listen() {
     state.goToSearchResults($searchForm.value)
   })
 
-  $featuredView.addEventListener('click', function (event) {
+  $featuredView.addEventListener('click', function ({target}) {
     browsingHistory.push(state.currentView)
     $detailsView.innerHTML = ''
-    const id = event.target.dataset.id
+    const id = target.dataset.id
     if (id) state.goToDetails(id)
   })
 
-  $searchView.addEventListener('click', function (event) {
+  $searchView.addEventListener('click', function ({target}) {
     browsingHistory.push(state.currentView)
     $detailsView.innerHTML = ''
-    const id = event.target.dataset.id
+    const id = target.dataset.id
     if (id) state.goToDetails(id)
   })
 
-  $detailsView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'add-cart') {
-      const id = event.target.dataset.id
+  $detailsView.addEventListener('click', function ({target}) {
+    if (target.getAttribute('id') === 'add-cart') {
+      const id = target.dataset.id
       return state.addToCart(id)
     }
-    switch (event.target.getAttribute('class')) {
-      case 'details image':
-        $imageView.innerHTML = ''
-        const image = event.target.getAttribute('src')
-        state.renderImageView(image)
-        state.activateView($imageView)
-        break
-      case 'thumbnailed image':
-        const newImage = event.target.getAttribute('src')
-        const $detailsImage = document.querySelector('.details')
-        const currentImage = $detailsImage.getAttribute('src')
-        $detailsImage.setAttribute('src', newImage)
-        event.target.setAttribute('src', currentImage)
+    const {classList} = event.target
+    if (!classList.contains('image')) return
+    if (classList.contains('details')) {
+      $imageView.innerHTML = ''
+      const image = event.target.getAttribute('src')
+      state.renderImageView(image)
+      state.activateView($imageView)
+      return
     }
+    if (!classList.contains('thumbnail')) return
+    const newImage = event.target.getAttribute('src')
+    const $detailsImage = document.querySelector('.details')
+    const currentImage = $detailsImage.getAttribute('src')
+    $detailsImage.setAttribute('src', newImage)
+    event.target.setAttribute('src', currentImage)
   })
 
   $imageView.addEventListener('click', function () {
     state.activateView($detailsView)
   })
 
-  $cartView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'checkout-button') {
+  $cartView.addEventListener('click', function ({target}) {
+    if (target.getAttribute('id') === 'checkout-button') {
       browsingHistory.push(state.currentView)
-      state.orderTotal = event.target.getAttribute('data-total')
+      state.orderTotal = target.getAttribute('data-total')
       return state.activateView($checkoutView)
     }
-    switch (event.target.getAttribute('class')) {
-      case 'cart-name': case 'cart image':
-        browsingHistory.push(state.currentView)
-        $detailsView.innerHTML = ''
-        var id = event.target.dataset.id
-        state.goToDetails(id)
-        break
-      case 'plus': case 'minus':
-        id = event.target.dataset.id
-        const plusOrMinus = event.target.getAttribute('class')
-        state.updateQuantity(id, plusOrMinus)
+    const {classList} = target
+    if (classList.contains('cart-name') || classList.contains('image')) {
+      browsingHistory.push(state.currentView)
+      $detailsView.innerHTML = ''
+      const id = target.dataset.id
+      state.goToDetails(id)
+      return
     }
+    const isPlus = classList.contains('plus')
+    if (!isPlus && !classList.contains('minus')) return
+    const id = target.dataset.id
+    state.updateQuantity(id, isPlus)
   })
 
   $checkoutView.addEventListener('submit', function (event) {
@@ -110,16 +108,16 @@ module.exports = function listen() {
     state.activateView($confirmOrderView)
   })
 
-  $confirmOrderView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'confirm-button') {
+  $confirmOrderView.addEventListener('click', function ({target}) {
+    if (target.getAttribute('id') === 'confirm-button') {
       browsingHistory.push(state.currentView)
       state.generateConfirmationNumber()
       state.activateView($confirmationView)
     }
   })
 
-  $confirmationView.addEventListener('click', function (event) {
-    if (event.target.getAttribute('id') === 'continue-shopping') {
+  $confirmationView.addEventListener('click', function ({target}) {
+    if (target.getAttribute('id') === 'continue-shopping') {
       browsingHistory.push(state.currentView)
       state.activateView($featuredView)
     }

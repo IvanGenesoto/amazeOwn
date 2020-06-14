@@ -9,18 +9,18 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     />
-    <link rel="stylesheet" href="default.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div id="nav">
       <span id="logo">
-        <h1 id="name">amaze<span>own</span></h1>
-        <img src="images/logo-frame/1.png" class="logo-frame" id="frame-1" />
+        <h1 id="name" class="clickable">amaze<span>own</span></h1>
+        <img src="images/logo-frame/1.png" class="clickable logo-frame" id="frame-1" />
       </span>
       <form>
         <input id="search-form" type="search" class="form-control" placeholder="Search Amazeown" />
       </form>
-      <span id="cart-container">
+      <span id="cart-container" class="clickable">
         <img src="images/cart.png" alt="cart" id="cart-button"/>
         <p id="item-count"></p>
       </span>
@@ -90,7 +90,7 @@
     <div class="container hidden" id="confirmation">
       <div class="jumbotron" id="thank-you">
         <h2 class="text-center">Thank you.</h2>
-        <h3 class="text-center" id="order-placed">Your order has been placed.</h3>
+        <h3 class="text-center" id="order-completed">Your order has been completed.</h3>
         <button class="btn btn-default button text-center" id="continue-shopping">CONTINUE SHOPPING</button>
       </div>
     </div>

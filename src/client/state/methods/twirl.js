@@ -1,7 +1,7 @@
 module.exports = function twirl() {
   const {c, isTwirling, logoFrames, $logoFrame1} = this
-  if (isTwirling === false) {
-    const $catchMe = c('span', {'id': 'catch-me', 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
+  if (!isTwirling) {
+    const $catchMe = c('span', {id: 'catch-me', 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'})
     const $logo = document.querySelector('#logo')
     $logo.insertAdjacentElement('beforeend', $catchMe)
     forward(1)
@@ -12,7 +12,7 @@ module.exports = function twirl() {
       backward(6)
     }
     else {
-      frame += 1
+      ++frame
       changeFrames(frame, forward)
     }
   }
@@ -25,7 +25,7 @@ module.exports = function twirl() {
     window.setTimeout(direction, 41.67, frame)
   }
   function backward(frame) {
-    frame -= 1
+    --frame
     if (frame > 1) {
       changeFrames(frame, backward)
     }

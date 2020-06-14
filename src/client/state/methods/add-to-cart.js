@@ -3,15 +3,15 @@ module.exports = function addToCart(id) {
   let isDuplicate = false
   cart.forEach(function(item) {
     if (item.id === id) {
-      item.quantity += 1
+      ++item.quantity
       isDuplicate = true
     }
   })
   if (!isDuplicate) {
-    const item = {'id': id, 'quantity': 1}
+    const item = {id, quantity: 1}
     cart.push(item)
   }
-  this.itemCount += 1
+  ++this.itemCount
   const $itemCount = document.querySelector('#item-count')
   $itemCount.textContent = this.itemCount
   this.twirl()
