@@ -1,5 +1,5 @@
 module.exports = function renderItemView(item) {
-  const {constructElement: c, getStars} = this
+  const {renderElement: c, getStars} = this
   const $app = document.getElementById('app')
   const price = item.price.toFixed(2)
   const stars = getStars(item.rating)

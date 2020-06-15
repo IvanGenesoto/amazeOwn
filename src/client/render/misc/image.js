@@ -1,5 +1,5 @@
 module.exports = function renderImage(src) {
-  const {constructElement: c} = this
+  const {renderElement: c} = this
   const $itemView = document.getElementById('item')
   const $app = document.getElementById('app')
   $itemView.classList.add('hidden')

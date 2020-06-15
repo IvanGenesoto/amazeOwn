@@ -1,6 +1,6 @@
 module.exports = function preloadFrame(index) {
   const state = this
-  const {constructElement: c, frames} = state
+  const {renderElement: c, frames} = state
   const src = 'images/bang/' + index + '.png'
   const id = 'frame-' + index
   const attributeByName = {

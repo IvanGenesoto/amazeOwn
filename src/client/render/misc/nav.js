@@ -1,5 +1,5 @@
 module.exports = function renderNav() {
-  const {constructElement: c, itemCount} = this
+  const {renderElement: c, itemCount} = this
   const $app = document.getElementById('app')
   $app.append(
     c('div', {id: 'nav'}, [
