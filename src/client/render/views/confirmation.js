@@ -1,5 +1,5 @@
-module.exports = function renderConfirmation(number) {
-  const {constructElement: c} = this
+module.exports = function renderConfirmationView(number) {
+  const {renderElement: c} = this
   const $app = document.getElementById('app')
   $app.append(
     c('div', {id: 'confirmation', class: 'container'}, [

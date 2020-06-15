@@ -1,6 +1,6 @@
 module.exports = function renderPromo() {
   const state = this
-  const {constructElement: c} = state
+  const {renderElement: c} = state
   state.removePromo()
   const $nav = document.getElementById('nav')
   const promoText = 'You\'re quick! Use promo code CAUGHTME for 15% off.'

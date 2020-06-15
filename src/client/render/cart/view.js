@@ -1,6 +1,6 @@
 module.exports = function renderCartView() {
   const state = this
-  const {constructElement: c, itemCount} = state
+  const {renderElement: c, itemCount} = state
   const $app = document.getElementById('app')
   const title = itemCount ? 'Shopping Cart' : 'Your cart is empty.'
   $app.append(

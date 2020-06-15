@@ -1,5 +1,5 @@
-module.exports = function renderCheckout() {
-  const {constructElement: c} = this
+module.exports = function renderCheckoutView() {
+  const {renderElement: c} = this
   const $app = document.getElementById('app')
   $app.append(
     c('div', {id: 'checkout', class: 'container'}, [

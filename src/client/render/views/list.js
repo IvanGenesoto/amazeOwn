@@ -1,5 +1,5 @@
 module.exports = function renderListView(items) {
-  const {constructElement: c, getStars} = this
+  const {renderElement: c, getStars} = this
   const $app = document.getElementById('app')
   const $listView = c('div', {id: 'list', class: 'container'})
   let $row

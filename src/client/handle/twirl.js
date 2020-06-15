@@ -1,6 +1,6 @@
 module.exports = function twirl() {
   const state = this
-  const {constructElement: c, isTwirling, frames} = state
+  const {renderElement: c, isTwirling, frames} = state
   const $frame1 = document.getElementById('frame-1')
   const attributeByName = {
     id: 'catch-me', 'data-target': '.bs-example-modal-sm', 'data-toggle': 'modal'

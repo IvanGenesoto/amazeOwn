@@ -2,7 +2,7 @@ module.exports = function listen() {
 
   const state = this
   const $app = document.getElementById('app')
-  const {generateConfirmationNumber} = state
+  const {generateNumber} = state
 
   const getIsFeatured = (id, classList) =>
     id === 'name' ||
@@ -36,12 +36,9 @@ module.exports = function listen() {
       $imageView.remove()
       return $itemView.classList.remove('hidden')
     }
-    if (id === 'checkout-button') {
-      state.orderTotal = $target.getAttribute('data-total')
-      return state.renderView('checkout')
-    }
+    if (id === 'checkout-button') return state.renderView('checkout')
     if (id !== 'confirm-button') return
-    const number = generateConfirmationNumber()
+    const number = generateNumber()
     state.cart = []
     state.itemCount = 0
     return state.renderView('confirmation', number)

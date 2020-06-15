@@ -1,5 +1,5 @@
 module.exports = function renderCartItem(quantity, item) {
-  const {constructElement: c} = this
+  const {renderElement: c} = this
   const $cartView = document.getElementById('cart')
   if (!quantity) return
   const price = item.price.toFixed(2)

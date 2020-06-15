@@ -1,4 +1,4 @@
-module.exports = function constructElement(tag, attributeByName, children) {
+module.exports = function renderElement(tag, attributeByName, children) {
   const $element = document.createElement(tag)
   attributeByName && Object
     .entries(attributeByName)
