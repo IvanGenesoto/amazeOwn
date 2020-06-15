@@ -1,15 +1,16 @@
-module.exports = function renderListView(list, view) {
+module.exports = function renderListView(items) {
   const {constructElement: c, getStars} = this
-  const $featuredView = document.getElementById('featured')
+  const $app = document.getElementById('app')
+  const $listView = c('div', {id: 'list', class: 'container'})
   let $row
-  if (!view) view = $featuredView
-  list.forEach(function (item, index) {
+  $app.append($listView)
+  items.forEach(function (item, index) {
     if (index % 3 === 0) $row = renderRow()
     renderColumn(item, $row)
   })
   function renderRow() {
     const $row = c('div', {class: 'row'})
-    view.append($row, c('hr'))
+    $listView.append($row, c('hr'))
     return $row
   }
   function renderColumn(item, $row) {

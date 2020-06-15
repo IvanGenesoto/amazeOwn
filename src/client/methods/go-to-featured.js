@@ -1,7 +1,7 @@
-module.exports = function goToSearchResults(string) {
+module.exports = function goToFeatured() {
   const state = this
   const {parse, renderView} = state
-  fetch('/search/' + string.toLowerCase())
+  fetch('/featured/')
     .then(parse)
     .then(renderView.bind(state, 'list'))
 }

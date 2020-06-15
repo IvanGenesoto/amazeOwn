@@ -1,13 +1,14 @@
-module.exports = function renderCartTotal(item) {
-  const {constructElement: c, customizeButton, quantity} = this
-  this.total = +this.total + item.price * quantity
-  this.total = this.total.toFixed(2)
+module.exports = function renderCartTotal(quantity, item) {
+  const state = this
+  const {constructElement: c, customizeButton} = state
+  state.total = +state.total + item.price * quantity
+  state.total = state.total.toFixed(2)
   const $shopping = document.getElementById('shopping')
   const $checkoutButton = document.getElementById('checkout-button')
   const attributeByName = {
     class: 'btn btn-default button cart',
     id: 'checkout-button',
-    'data-total': this.total
+    'data-total': state.total
   }
   $checkoutButton && $checkoutButton.remove()
   $shopping.append(c('button', attributeByName, 'CHECKOUT'))
@@ -19,7 +20,7 @@ module.exports = function renderCartTotal(item) {
       'Total:',
       c('span', null, [
         '$',
-        c('span', null, this.total)
+        c('span', null, state.total)
       ])
     ])
   )

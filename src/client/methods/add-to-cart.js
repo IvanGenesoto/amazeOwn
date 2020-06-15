@@ -1,5 +1,6 @@
 module.exports = function addToCart(id) {
-  const {cart} = this
+  const state = this
+  const {cart} = state
   let isDuplicate = false
   cart.forEach(item => {
     if (item.id !== id) return
@@ -7,8 +8,8 @@ module.exports = function addToCart(id) {
     isDuplicate = true
   })
   if (!isDuplicate) cart.push({id, quantity: 1})
-  ++this.itemCount
+  ++state.itemCount
   const $itemCount = document.getElementById('item-count')
-  $itemCount.textContent = this.itemCount
-  this.twirl()
+  $itemCount.textContent = state.itemCount
+  state.twirl()
 }

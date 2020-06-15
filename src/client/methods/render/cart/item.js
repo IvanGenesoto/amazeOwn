@@ -1,5 +1,5 @@
-module.exports = function renderCartItem(item) {
-  const {constructElement: c, quantity} = this
+module.exports = function renderCartItem(quantity, item) {
+  const {constructElement: c} = this
   const $cartView = document.getElementById('cart')
   if (!quantity) return
   const price = item.price.toFixed(2)
@@ -11,7 +11,7 @@ module.exports = function renderCartItem(item) {
       c('div', {class: 'col-xs-7'}, [
         c('h3', {class: 'cart-name', 'data-id': item.id}, item.name)
       ]),
-      c('div', {class: 'col-xs-1 cart price-column', 'data-id': item.id}, [
+      c('div', {class: 'col-xs-1 cart price-column'}, [
         c('h3', {class: 'price'}, [
           c('span', null, '$'),
           price

@@ -1,20 +1,26 @@
 module.exports = function RenderMethods(reducers) {
 
+  const renderViewByName = {
+    list: require('./list-view'),
+    item: require('./item-view'),
+    checkout: require('./checkout-view'),
+    confirmOrder: require('./confirm-order-view'),
+    confirmation: require('./confirmation-view')
+  }
+
   const renderMethods = {
+    renderView: require('./view'),
     renderNav: require('./nav'),
-    renderContainers: require('./containers'),
-    renderListView: require('./list-view'),
-    renderSearchView: require('./search-view'),
     renderPromo: require('./promo'),
-    renderDetailsView: require('./details-view'),
-    renderImageView: require('./image-view'),
-    renderCheckout: require('./checkout'),
-    renderConfirmOrder: require('./confirm-order'),
-    renderConfirmation: require('./confirmation')
+    renderImage: require('./image'),
+    renderViewByName
   }
 
   const cartMethods = require('./cart')()
+  const {renderCartView} = cartMethods
   const {append} = reducers
+
+  renderViewByName.cart = renderCartView
 
   return Object.entries(cartMethods).reduce(append, renderMethods)
 }
