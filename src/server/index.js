@@ -13,9 +13,10 @@ app.get('/item/:id', (request, response) => {
   response.json(item)
 })
 
-app.get('/search/:string', (request, response) => {
-  const query = request.params.string
-  const results = data.filter(item => item.name.toLowerCase().search(query) !== -1)
+app.get('/search/:query', (request, response) => {
+  const query = request.params.query.toLowerCase()
+  const filter = item => item.name.toLowerCase().search(query) !== -1
+  const results = data.filter(filter)
   response.json(results)
 })
 

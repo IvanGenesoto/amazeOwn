@@ -1,5 +1,5 @@
 const state = require('./state')()
 
-state.preloadFrame(0)
 state.listen()
-state.goToFeatured()
+state.preloadFrame(0)
+state.fetchData('featured', 'list')

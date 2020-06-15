@@ -32,11 +32,23 @@
   height: 55px;
 }
 
-.button {
+.own.button{
   float: right;
   color: white;
   background-color: #f0bc29;
   border-color: #f0bc29;
+}
+
+.own.button:hover {
+  color: white;
+  background-color: #26c431;
+  border-color: #26c431;
+}
+
+.own.button:hover:active{
+  color: #ebebeb;
+  background-color: #21b42b;
+  border-color: #21b42b;
 }
 
 .item {
