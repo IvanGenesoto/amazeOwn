@@ -1,10 +1,11 @@
 module.exports = function renderConfirmOrder(valueByName) {
-  const {constructElement: c, orderTotal, customizeButton} = this
+  const {constructElement: c, orderTotal} = this
   const $app = document.getElementById('app')
   $app.append(
     c('div', {id: 'confirm-order', class: 'container'}, [
       c('div', {class: 'row'}, [
-        c('div', {class: 'col-xs-6 offset-xs-3'}, [
+        c('div', {class: 'col-xs-3'}),
+        c('div', {class: 'col-xs-6'}, [
           c('div', {class: 'row'}, [
             c('div', {class: 'col-xs-12'}, [
               c('h2', null, 'Confirm Order')
@@ -32,12 +33,11 @@ module.exports = function renderConfirmOrder(valueByName) {
           ]),
           c('div', {class: 'row'}, [
             c('div', {class: 'col-xs-12'}, [
-              c('button', {class: 'btn btn-default button', id: 'confirm-button'}, 'COMPLETE ORDER')
+              c('button', {class: 'btn btn-default own button', id: 'confirm-button'}, 'COMPLETE ORDER')
             ])
           ])
         ])
       ])
     ])
   )
-  customizeButton('#confirm-button')
 }

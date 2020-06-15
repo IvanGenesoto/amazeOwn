@@ -3,9 +3,7 @@ module.exports = function Methods(reducers) {
   const methods = {
     addToCart: require('./add-to-cart'),
     generateConfirmationNumber: require('./generate-confirmation-number'),
-    goToItem: require('./go-to-item'),
-    goToFeatured: require('./go-to-featured'),
-    goToSearchResults: require('./go-to-search-results'),
+    fetchData: require('./fetch-data'),
     listen: require('./listen'),
     preloadFrame: require('./preload-frame'),
     removePromo: require('./remove-promo'),

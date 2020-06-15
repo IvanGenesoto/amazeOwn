@@ -1,10 +1,11 @@
 module.exports = function renderCheckout() {
-  const {constructElement: c, customizeButton} = this
+  const {constructElement: c} = this
   const $app = document.getElementById('app')
   $app.append(
     c('div', {id: 'checkout', class: 'container'}, [
       c('div', {class: 'row'}, [
-        c('div', {class: 'col-xs-6 offset-xs-3'}, [
+        c('div', {class: 'col-xs-3'}),
+        c('div', {class: 'col-xs-6'}, [
           c('form', null, [
             c('div', {class: 'form-group'}, [
               c('label', {for: 'form-email'}, 'Email'),
@@ -42,14 +43,12 @@ module.exports = function renderCheckout() {
               c('label', {for: 'form-promo-code'}, 'Promo Code'),
               c('input', {type: 'text', class: 'form-control', id: 'form-promo-code', placeholder: 'Promo code'})
             ]),
-            c('div', {class: 'checkbox'}, [
-              c('input', {type: 'checkbox'}, 'Send me exciting Amazeown emails!')
-            ]),
-            c('button', {type: 'submit', class: 'btn btn-default button', id: 'submit-button'}, 'Submit')
+            c('input', {type: 'checkbox'}),
+            c('span', null, ' Send me exciting Amazeown emails!'),
+            c('button', {type: 'submit', class: 'btn btn-default own button', id: 'submit-button'}, 'Submit')
           ])
         ])
       ])
     ])
   )
-  customizeButton('#submit-button')
 }

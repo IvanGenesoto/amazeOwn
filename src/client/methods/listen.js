@@ -4,6 +4,12 @@ module.exports = function listen() {
   const $app = document.getElementById('app')
   const {generateConfirmationNumber} = state
 
+  const getIsFeatured = (id, classList) =>
+    id === 'name' ||
+    id === 'own' ||
+    id === 'continue-shopping' ||
+    classList.contains('bang')
+
   $app.addEventListener('click', function (event) {
     const {target: $target} = event
     const {classList} = $target
@@ -15,10 +21,10 @@ module.exports = function listen() {
     const isThumbnail = classList.contains('thumbnail')
     if (id === 'catch-me') return state.renderPromo()
     if (id === 'cart-button' || id === 'item-count') return state.renderView('cart')
-    if (id === 'name' || id === 'own' || classList.contains('bang')) state.goToFeatured()
+    if (getIsFeatured(id, classList)) state.fetchData('featured', 'list')
     if (id === 'add-to-cart') return state.addToCart(dataId)
     if (isPlus || isMinus) return state.updateQuantity(dataId, isPlus)
-    if (dataId) return state.goToItem(dataId)
+    if (dataId) return state.fetchData('item', 'item', dataId)
     if (isThumbnail) {
       const $displayedImage = document.getElementById('display-image')
       return $displayedImage.setAttribute('src', src)
@@ -34,7 +40,6 @@ module.exports = function listen() {
       state.orderTotal = $target.getAttribute('data-total')
       return state.renderView('checkout')
     }
-    if (id === 'continue-shopping') return state.goToFeatured()
     if (id !== 'confirm-button') return
     const number = generateConfirmationNumber()
     state.cart = []
@@ -46,9 +51,9 @@ module.exports = function listen() {
     const {target: $target} = event
     const id = $target.getAttribute('id')
     const $searchInput = document.getElementById('search-input')
-    const {value} = $searchInput
+    const {value: query} = $searchInput
     event.preventDefault()
-    if (id === 'search-form') return state.goToSearchResults(value)
+    if (id === 'search-form') return state.fetchData('search', 'list', query)
     const idByName = {
       email: 'form-email',
       name: 'form-name',

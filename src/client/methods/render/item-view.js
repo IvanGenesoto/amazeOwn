@@ -1,5 +1,5 @@
 module.exports = function renderItemView(item) {
-  const {constructElement: c, getStars, customizeButton} = this
+  const {constructElement: c, getStars} = this
   const $app = document.getElementById('app')
   const price = item.price.toFixed(2)
   const stars = getStars(item.rating)
@@ -35,7 +35,7 @@ module.exports = function renderItemView(item) {
               c('h3', {class: 'price'}, price)
             ]),
             c('div', {class: 'col-xs-6'}, [
-              c('button', {class: 'btn btn-default button', id: 'add-to-cart', 'data-id': item.id}, 'ADD TO CART')
+              c('button', {class: 'btn btn-default own button', id: 'add-to-cart', 'data-id': item.id}, 'ADD TO CART')
             ])
           ]),
           c('hr'),
@@ -44,5 +44,4 @@ module.exports = function renderItemView(item) {
       ])
     ])
   )
-  customizeButton('#add-to-cart')
 }
