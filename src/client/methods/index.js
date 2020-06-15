@@ -1,13 +1,13 @@
 module.exports = function Methods(reducers) {
 
   const methods = {
-    activateView: require('./activate-view'),
     addToCart: require('./add-to-cart'),
     generateConfirmationNumber: require('./generate-confirmation-number'),
-    goToDetails: require('./go-to-details'),
+    goToItem: require('./go-to-item'),
+    goToFeatured: require('./go-to-featured'),
     goToSearchResults: require('./go-to-search-results'),
     listen: require('./listen'),
-    preloadLogoFrames: require('./preload-logo-frames'),
+    preloadFrame: require('./preload-frame'),
     removePromo: require('./remove-promo'),
     twirl: require('./twirl'),
     updateQuantity: require('./update-quantity')

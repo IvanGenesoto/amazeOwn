@@ -26,7 +26,7 @@
   display: block;
 }
 
-.logo-frame {
+.bang {
   position: absolute;
   top: 10px;
   height: 55px;
@@ -66,10 +66,6 @@
 
 .list.image {
   width: 160px;
-}
-
-.details.image {
-  width: 100%;
 }
 
 .price-column {
@@ -113,7 +109,7 @@
   color: #f0bc29;
 }
 
-#search-form {
+#search-input {
   position: absolute;
   width: 33%;
   top: 30px;
@@ -162,33 +158,31 @@
   font-weight: bold;
 }
 
-#back {
-  position: absolute;
-  top: 97px;
-  left: 7px;
+#display-image {
+  width: 100%;
 }
 
-#frame-1 {
+#frame-0 {
   left: 261px;
 }
 
-#frame-2 {
+#frame-1 {
   left: 266px;
 }
 
-#frame-3 {
+#frame-2 {
   left: 274px;
 }
 
-#frame-4 {
+#frame-3 {
   left: 265px;
 }
 
-#frame-5 {
+#frame-4 {
   left: 251px;
 }
 
-#frame-6 {
+#frame-5 {
   left: 238px;
 }
 

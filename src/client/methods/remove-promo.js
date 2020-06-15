@@ -1,8 +1,7 @@
 module.exports = function removePromo() {
-  if (this.promoIsUp) {
-    const $nav = document.getElementById('nav')
-    const $promo = document.querySelector('.modal')
-    $nav.removeChild($promo)
-    this.promoIsUp = false
-  }
+  const state = this
+  if (!state.promoIsUp) return
+  const $promo = document.getElementById('promo')
+  $promo.remove()
+  state.promoIsUp = false
 }

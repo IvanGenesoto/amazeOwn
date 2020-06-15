@@ -5,9 +5,9 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, 'public')))
-app.get('/featured', (unusedRequest, response) => response.json(data))
+app.get('/featured', (unused, response) => response.json(data))
 
-app.get('/items/:id', (request, response) => {
+app.get('/item/:id', (request, response) => {
   const id = +request.params.id
   const item = data.find(item => item.id === id)
   response.json(item)
