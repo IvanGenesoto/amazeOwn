@@ -1,6 +1,8 @@
 module.exports = function renderConfirmOrderView(valueByName) {
+
   const {renderElement: r, total} = this
   const $app = document.getElementById('app')
+
   $app.append(
     r('div', {id: 'confirm-order', class: 'container'}, [
       r('div', {class: 'row'}, [

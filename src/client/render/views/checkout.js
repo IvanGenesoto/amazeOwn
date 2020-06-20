@@ -1,6 +1,8 @@
 module.exports = function renderCheckoutView() {
+
   const {renderElement: r} = this
   const $app = document.getElementById('app')
+
   $app.append(
     r('div', {id: 'checkout', class: 'container'}, [
       r('div', {class: 'row'}, [

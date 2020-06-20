@@ -1,21 +1,23 @@
-module.exports = function renderCartTotal(quantity, item) {
+module.exports = function renderCartTotal(total) {
+
   const state = this
   const {renderElement: r} = state
-  state.total = +state.total + item.price * quantity
-  state.total = state.total.toFixed(2)
   const $shopping = document.getElementById('shopping')
+
   const attributeByName = {
     class: 'btn btn-default own button cart',
     id: 'checkout-button',
-    'data-total': state.total
+    'data-total': total
   }
+
   $shopping.append(r('button', attributeByName, 'CHECKOUT'))
+
   $shopping.append(
     r('span', {id: 'cart-total'}, [
       'Total:',
       r('span', null, [
         '$',
-        r('span', null, state.total)
+        r('span', null, total)
       ])
     ])
   )

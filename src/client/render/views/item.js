@@ -1,8 +1,10 @@
-module.exports = function renderItemView(item) {
+module.exports = function renderItemView([item]) {
+
   const {renderElement: r, getStars} = this
   const $app = document.getElementById('app')
   const price = item.price.toFixed(2)
   const stars = getStars(item.rating)
+
   $app.append(
     r('div', {id: 'item', class: 'container'}, [
       r('div', {class: 'row'}, [

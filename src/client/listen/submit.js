@@ -3,13 +3,12 @@ module.exports = function listenForSubmit() {
   const state = this
   const $app = document.getElementById('app')
 
-  $app.addEventListener('submit', function (event) {
+  $app.addEventListener('submit', event => {
+    event.preventDefault()
     const {target: $target} = event
     const id = $target.getAttribute('id')
     const $searchInput = document.getElementById('search-input')
     const {value: query} = $searchInput
-    event.preventDefault()
-    if (id === 'search-form') return state.fetchData('search', 'list', query)
     const idByName = {
       email: 'form-email',
       name: 'form-name',
@@ -21,12 +20,13 @@ module.exports = function listenForSubmit() {
       ccv: 'form-ccv',
       promo: 'form-promo-code'
     }
-    const appendValue = function (valueByName, [name, id]) {
+    const appendValue = (valueByName, [name, id]) => {
       const $input = document.getElementById(id)
       const {value} = $input
       valueByName[name] = value
       return valueByName
     }
+    if (id === 'search-form') return state.fetchData('search', 'list', query)
     const valueByName = Object.entries(idByName).reduce(appendValue, {})
     state.renderView('confirmOrder', valueByName)
   })

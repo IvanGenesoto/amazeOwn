@@ -1,6 +1,8 @@
 module.exports = function renderNav() {
+
   const {renderElement: r, itemCount} = this
   const $app = document.getElementById('app')
+
   $app.append(
     r('div', {id: 'nav'}, [
       r('span', {id: 'logo', class: 'clickable'}, [
