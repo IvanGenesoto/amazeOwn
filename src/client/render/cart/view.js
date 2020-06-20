@@ -1,14 +1,14 @@
 module.exports = function renderCartView() {
   const state = this
-  const {renderElement: c, itemCount} = state
+  const {renderElement: r, itemCount} = state
   const $app = document.getElementById('app')
   const title = itemCount ? 'Shopping Cart' : 'Your cart is empty.'
   $app.append(
-    c('div', {id: 'cart', class: 'container'}, [
-      c('div', {class: 'row'}, [
-        c('div', {class: 'col-xs-12', id: 'shopping-column'}, [
-          c('h1', {id: 'shopping'}, title),
-          c('hr', {id: 'shopping-line'})
+    r('div', {id: 'cart', class: 'container'}, [
+      r('div', {class: 'row'}, [
+        r('div', {class: 'col-xs-12', id: 'shopping-column'}, [
+          r('h1', {id: 'shopping'}, title),
+          r('hr', {id: 'shopping-line'})
         ])
       ])
     ])

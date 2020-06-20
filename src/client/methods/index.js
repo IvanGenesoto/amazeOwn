@@ -3,7 +3,6 @@ module.exports = {
   fetchData: require('./fetch-data'),
   generateNumber: require('./generate-number'),
   getStars: require('./get-stars'),
-  listen: require('./listen'),
   parse: require('./parse'),
   preloadFrame: require('./preload-frame'),
   removePromo: require('./remove-promo'),

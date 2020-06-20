@@ -1,45 +1,45 @@
 module.exports = function renderItemView(item) {
-  const {renderElement: c, getStars} = this
+  const {renderElement: r, getStars} = this
   const $app = document.getElementById('app')
   const price = item.price.toFixed(2)
   const stars = getStars(item.rating)
   $app.append(
-    c('div', {id: 'item', class: 'container'}, [
-      c('div', {class: 'row'}, [
-        c('div', {class: 'col-xs-1'}, [
-          c('div', {class: 'row'}, [
-            c('div', {class: 'col-xs-12'}, [
-              c('img', {class: 'clickable thumbnail image', src: item.image})
+    r('div', {id: 'item', class: 'container'}, [
+      r('div', {class: 'row'}, [
+        r('div', {class: 'col-xs-1'}, [
+          r('div', {class: 'row'}, [
+            r('div', {class: 'col-xs-12'}, [
+              r('img', {class: 'clickable thumbnail image', src: item.image})
             ])
           ]),
-          c('div', {class: 'row'}, [
-            c('div', {class: 'col-xs-12'}, [
-              c('img', {class: 'clickable thumbnail image', src: item.image2})
+          r('div', {class: 'row'}, [
+            r('div', {class: 'col-xs-12'}, [
+              r('img', {class: 'clickable thumbnail image', src: item.image2})
             ])
           ]),
-          c('div', {class: 'row'}, [
-            c('div', {class: 'col-xs-12'}, [
-              c('img', {class: 'clickable thumbnail image', src: item.image3})
+          r('div', {class: 'row'}, [
+            r('div', {class: 'col-xs-12'}, [
+              r('img', {class: 'clickable thumbnail image', src: item.image3})
             ])
           ])
         ]),
-        c('div', {class: 'col-xs-4'}, [
-          c('img', {id: 'display-image', class: 'clickable', src: item.image})
+        r('div', {class: 'col-xs-4'}, [
+          r('img', {id: 'display-image', class: 'clickable', src: item.image})
         ]),
-        c('div', {class: 'col-xs-7'}, [
-          c('h2', null, item.name),
-          c('img', {src: stars, class: 'rating'}),
-          c('div', {class: 'row'}, [
-            c('div', {class: 'col-xs-6 price-column'}, [
-              c('h3', {class: 'dollar'}, '$'),
-              c('h3', {class: 'price'}, price)
+        r('div', {class: 'col-xs-7'}, [
+          r('h2', null, item.name),
+          r('img', {src: stars, class: 'rating'}),
+          r('div', {class: 'row'}, [
+            r('div', {class: 'col-xs-6 price-column'}, [
+              r('h3', {class: 'dollar'}, '$'),
+              r('h3', {class: 'price'}, price)
             ]),
-            c('div', {class: 'col-xs-6'}, [
-              c('button', {class: 'btn btn-default own button', id: 'add-to-cart', 'data-id': item.id}, 'ADD TO CART')
+            r('div', {class: 'col-xs-6'}, [
+              r('button', {class: 'btn btn-default own button', id: 'add-to-cart', 'data-id': item.id}, 'ADD TO CART')
             ])
           ]),
-          c('hr'),
-          c('p', null, item.description)
+          r('hr'),
+          r('p', null, item.description)
         ])
       ])
     ])
