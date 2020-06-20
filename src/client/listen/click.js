@@ -2,7 +2,7 @@ module.exports = function listenForClick() {
 
   const state = this
   const $app = document.getElementById('app')
-  const {generateNumber} = state
+  const {generateNumber, cart} = state
 
   const getIsFeatured = (id, classList) =>
     id === 'name' ||
@@ -10,18 +10,20 @@ module.exports = function listenForClick() {
     id === 'continue-shopping' ||
     classList.contains('bang')
 
-  $app.addEventListener('click', function (event) {
+  $app.addEventListener('click', event => {
     const {target: $target} = event
-    const {classList} = $target
+    const {classList, dataset} = $target
+    const {id: dataId} = dataset
     const id = $target.getAttribute('id')
-    const dataId = $target.dataset.id
     const src = $target.getAttribute('src')
     const isPlus = classList.contains('plus')
     const isMinus = classList.contains('minus')
     const isThumbnail = classList.contains('thumbnail')
     if (id === 'catch-me') return state.renderPromo()
-    if (id === 'cart-button' || id === 'item-count') return state.renderView('cart')
-    if (getIsFeatured(id, classList)) state.fetchData('featured', 'list')
+    if (id === 'cart-button' || id === 'item-count') {
+      return state.fetchData('item', 'cart', cart)
+    }
+    if (getIsFeatured(id, classList)) return state.fetchData('featured', 'list')
     if (id === 'add-to-cart') return state.addToCart(dataId)
     if (isPlus || isMinus) return state.updateQuantity(dataId, isPlus)
     if (dataId) return state.fetchData('item', 'item', dataId)
@@ -39,7 +41,7 @@ module.exports = function listenForClick() {
     if (id === 'checkout-button') return state.renderView('checkout')
     if (id !== 'confirm-button') return
     const number = generateNumber()
-    state.cart = []
+    cart.length = 0
     state.itemCount = 0
     return state.renderView('confirmation', number)
   })

@@ -1,8 +1,11 @@
-module.exports = function renderCartItem(quantity, item) {
+module.exports = function renderCartItem(item, quantity) {
+
   const {renderElement: r} = this
-  const $cartView = document.getElementById('cart')
-  if (!quantity) return
   const price = item.price.toFixed(2)
+  const $cartView = document.getElementById('cart')
+
+  if (!quantity) return
+
   $cartView.append(
     r('div', {class: 'row'}, [
       r('div', {class: 'col-xs-2'}, [
@@ -34,5 +37,6 @@ module.exports = function renderCartItem(quantity, item) {
       r('hr', {class: 'cart hr'})
     ])
   )
+
   return item
 }

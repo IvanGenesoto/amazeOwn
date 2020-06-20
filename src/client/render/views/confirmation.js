@@ -1,6 +1,8 @@
 module.exports = function renderConfirmationView(number) {
+
   const {renderElement: r} = this
   const $app = document.getElementById('app')
+
   $app.append(
     r('div', {id: 'confirmation', class: 'container'}, [
       r('div', {id: 'thank-you', class: 'jumbotron'}, [

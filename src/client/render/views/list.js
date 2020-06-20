@@ -1,19 +1,16 @@
-module.exports = function renderListView(items) {
+module.exports = function renderListView([items]) {
+
   const {renderElement: r, getStars} = this
   const $app = document.getElementById('app')
   const $listView = r('div', {id: 'list', class: 'container'})
-  let $row
-  $app.append($listView)
-  items.forEach(function (item, index) {
-    if (index % 3 === 0) $row = renderRow()
-    renderColumn(item, $row)
-  })
-  function renderRow() {
+
+  const renderRow = () => {
     const $row = r('div', {class: 'row'})
     $listView.append($row, r('hr'))
     return $row
   }
-  function renderColumn(item, $row) {
+
+  const renderColumn = (item, $row) => {
     const price = item.price.toFixed(2)
     const stars = getStars(item.rating)
     $row.append(
@@ -26,4 +23,13 @@ module.exports = function renderListView(items) {
       ])
     )
   }
+
+  let $row
+
+  $app.append($listView)
+
+  items.forEach((item, index) => {
+    if (index % 3 === 0) $row = renderRow()
+    renderColumn(item, $row)
+  })
 }

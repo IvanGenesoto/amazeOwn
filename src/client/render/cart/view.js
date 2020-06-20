@@ -1,8 +1,25 @@
-module.exports = function renderCartView() {
+module.exports = function renderCartView(items) {
+
   const state = this
-  const {renderElement: r, itemCount} = state
+  const {renderElement: r, itemCount, cart} = state
   const $app = document.getElementById('app')
   const title = itemCount ? 'Shopping Cart' : 'Your cart is empty.'
+
+  const add = (total, item, index) => {
+    const {price} = item
+    const {quantity} = cart[index] || {}
+    return total + price * +quantity
+  }
+
+  const total = items
+    .reduce(add, 0)
+    .toFixed(2)
+
+  const callRenderCartItem = (item, index) => {
+    const {quantity} = cart[index] || {}
+    state.renderCartItem(item, quantity)
+  }
+
   $app.append(
     r('div', {id: 'cart', class: 'container'}, [
       r('div', {class: 'row'}, [
@@ -13,5 +30,7 @@ module.exports = function renderCartView() {
       ])
     ])
   )
-  itemCount && state.renderCartItems()
+
+  items.forEach(callRenderCartItem)
+  state.renderCartTotal(total)
 }
