@@ -1,6 +1,6 @@
 module.exports = function renderPromo() {
   const state = this
-  const {renderElement: c} = state
+  const {renderElement: r} = state
   state.removePromo()
   const $nav = document.getElementById('nav')
   const promoText = 'You\'re quick! Use promo code CAUGHTME for 15% off.'
@@ -13,9 +13,9 @@ module.exports = function renderPromo() {
   }
   state.promoIsUp = true
   $nav.prepend(
-    c('div', attributeByName, [
-      c('div', {class: 'modal-dialog modal-sm', role: 'document'}, [
-        c('div', {class: 'modal-content text-center'}, promoText)
+    r('div', attributeByName, [
+      r('div', {class: 'modal-dialog modal-sm', role: 'document'}, [
+        r('div', {class: 'modal-content text-center'}, promoText)
       ])
     ])
   )

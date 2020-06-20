@@ -1,21 +1,21 @@
 module.exports = function renderNav() {
-  const {renderElement: c, itemCount} = this
+  const {renderElement: r, itemCount} = this
   const $app = document.getElementById('app')
   $app.append(
-    c('div', {id: 'nav'}, [
-      c('span', {id: 'logo', class: 'clickable'}, [
-        c('h1', {id: 'name'}, [
+    r('div', {id: 'nav'}, [
+      r('span', {id: 'logo', class: 'clickable'}, [
+        r('h1', {id: 'name'}, [
           'amaze',
-          c('span', {id: 'own'}, 'own')
+          r('span', {id: 'own'}, 'own')
         ]),
-        c('img', {src: 'images/bang/1.png', class: 'bang', id: 'frame-1'})
+        r('img', {src: 'images/bang/1.png', class: 'bang', id: 'frame-1'})
       ]),
-      c('form', {id: 'search-form'}, [
-        c('input', {id: 'search-input', type: 'search', class: 'form-control', placeholder: 'Search Amazeown'})
+      r('form', {id: 'search-form'}, [
+        r('input', {id: 'search-input', type: 'search', class: 'form-control', placeholder: 'Search Amazeown'})
       ]),
-      c('span', {id: 'cart-container', class: 'clickable'}, [
-        c('img', {src: 'images/cart.png', alt: 'cart', id: 'cart-button'}),
-        c('p', {id: 'item-count'}, itemCount)
+      r('span', {id: 'cart-container', class: 'clickable'}, [
+        r('img', {src: 'images/cart.png', alt: 'cart', id: 'cart-button'}),
+        r('p', {id: 'item-count'}, itemCount)
       ])
     ])
   )
