@@ -5,20 +5,10 @@ module.exports = function updateQuantity(id_, isPlus) {
   const index = cart.findIndex(({id}) => id === id_)
   const item = cart[index]
 
-  if (isPlus) {
-    ++item.quantity
-    ++state.itemCount
-  }
+  if (isPlus) ++item.quantity
+  else if (item.quantity > 1) --item.quantity
+  else cart.splice(index, 1)
 
-  else if (item.quantity > 1) {
-    --item.quantity
-    --state.itemCount
-  }
-
-  else {
-    cart.splice(index, 1)
-    --state.itemCount
-  }
-
+  state.saveCart()
   state.fetchData('item', 'cart', cart)
 }

@@ -1,6 +1,8 @@
 module.exports = function renderNav() {
 
-  const {renderElement: r, itemCount} = this
+  const state = this
+  const {renderElement: r} = state
+  const itemCount = state.getItemCount()
   const $app = document.getElementById('app')
 
   $app.append(

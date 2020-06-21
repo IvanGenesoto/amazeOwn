@@ -42,7 +42,7 @@ module.exports = function listenForClick() {
     if (id !== 'confirm-button') return
     const number = generateNumber()
     cart.length = 0
-    state.itemCount = 0
+    state.saveCart()
     return state.renderView('confirmation', number)
   })
 }
