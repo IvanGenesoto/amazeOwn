@@ -1,14 +1,15 @@
 module.exports = function renderCartView(items) {
 
   const state = this
-  const {renderElement: r, itemCount, cart} = state
+  const {renderElement: r, cart} = state
   const $app = document.getElementById('app')
+  const itemCount = state.getItemCount()
   const title = itemCount ? 'Shopping Cart' : 'Your cart is empty.'
 
   const add = (total, item, index) => {
     const {price} = item
     const {quantity} = cart[index] || {}
-    return total + price * +quantity
+    return total + price * quantity
   }
 
   const total = items
