@@ -1,7 +1,7 @@
-module.exports = function preloadFrame(index) {
+module.exports = function preloadFrame(index = 0) {
 
   const state = this
-  const {renderElement: r, frames} = state
+  const {renderElement: r, frames = []} = state
   const src = 'images/bang/' + index + '.png'
   const id = 'frame-' + index
 
@@ -15,6 +15,7 @@ module.exports = function preloadFrame(index) {
 
   const $bang = r('img', attributeByName)
 
+  state.frames = frames
   frames.push($bang)
   ++index
   index < 6 && state.preloadFrame(index)

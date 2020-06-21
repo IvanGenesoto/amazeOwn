@@ -7,7 +7,7 @@ module.exports = function addToCart(id) {
 
   item && ++item.quantity
   item || cart.push({id, quantity: 1})
-  ++state.itemCount
-  $itemCount.textContent = state.itemCount
+  state.saveCart()
+  $itemCount.textContent = state.getItemCount()
   state.twirl()
 }

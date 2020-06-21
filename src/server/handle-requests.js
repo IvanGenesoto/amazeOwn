@@ -10,7 +10,6 @@ module.exports = function handleRequests(app, data) {
 
   app.get('/search/:query', (request, response) => {
     const query = request.params.query.toLowerCase()
-    console.log(query)
     const filter = item => item.name.toLowerCase().search(query) !== -1
     const results = data.filter(filter)
     response.json(results)
