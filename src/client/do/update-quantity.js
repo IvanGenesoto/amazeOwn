@@ -10,5 +10,6 @@ module.exports = function updateQuantity(id_, isPlus) {
   else cart.splice(index, 1)
 
   state.saveCart()
-  state.fetchData('item', 'cart', cart)
+  state.shouldAlterHistory = false
+  state.fetchData({pathName: 'item', viewName: 'cart', hash: '#cart', parameter: cart})
 }

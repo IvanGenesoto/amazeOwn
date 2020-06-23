@@ -2,7 +2,7 @@ module.exports = function listenForClick() {
 
   const state = this
   const $app = document.getElementById('app')
-  const {generateNumber, cart} = state
+  const {cart} = state
 
   const getIsFeatured = (id, classList) =>
     id === 'name' ||
@@ -20,13 +20,17 @@ module.exports = function listenForClick() {
     const isMinus = classList.contains('minus')
     const isThumbnail = classList.contains('thumbnail')
     if (id === 'catch-me') return state.renderPromo()
-    if (id === 'cart-button' || id === 'item-count') {
-      return state.fetchData('item', 'cart', cart)
-    }
-    if (getIsFeatured(id, classList)) return state.fetchData('featured', 'list')
+    if (id === 'cart-button' || id === 'item-count') state.fetchData({
+      pathName: 'item', viewName: 'cart', hash: '#cart', parameter: cart
+    })
+    if (getIsFeatured(id, classList)) return state.fetchData({
+      pathName: 'featured', viewName: 'list'
+    })
     if (id === 'add-to-cart') return state.addToCart(dataId)
     if (isPlus || isMinus) return state.updateQuantity(dataId, isPlus)
-    if (dataId) return state.fetchData('item', 'item', dataId)
+    if (dataId) return state.fetchData({
+      pathName: 'item', viewName: 'item', hash: '#item', parameter: dataId
+    })
     if (isThumbnail) {
       const $displayedImage = document.getElementById('display-image')
       return $displayedImage.setAttribute('src', src)
@@ -40,9 +44,8 @@ module.exports = function listenForClick() {
     }
     if (id === 'checkout-button') return state.renderView('checkout')
     if (id !== 'confirm-button') return
-    const number = generateNumber()
     cart.length = 0
     state.saveCart()
-    return state.renderView('confirmation', number)
+    return state.renderView('confirmation')
   })
 }
