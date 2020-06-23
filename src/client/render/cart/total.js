@@ -1,7 +1,8 @@
 module.exports = function renderCartTotal(total) {
 
   const state = this
-  const {renderElement: r} = state
+  const {renderElement: r, cart} = state
+  const [hasItem] = cart
   const $shopping = document.getElementById('shopping')
 
   const attributeByName = {
@@ -10,6 +11,7 @@ module.exports = function renderCartTotal(total) {
     'data-total': total
   }
 
+  hasItem || (attributeByName.disabled = true)
   $shopping.append(r('button', attributeByName, 'CHECKOUT'))
 
   $shopping.append(

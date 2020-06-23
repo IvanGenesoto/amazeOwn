@@ -1,7 +1,8 @@
-module.exports = function fetchData(pathName, viewName, parameter = '') {
+module.exports = function fetchData(fetchKit) {
 
   const state = this
   const {renderView} = state
+  const {pathName, viewName, parameter = ''} = fetchKit
   const parameters = Array.isArray(parameter) ? parameter : [parameter]
   const parse = response => response.json()
 
@@ -17,5 +18,5 @@ module.exports = function fetchData(pathName, viewName, parameter = '') {
   Promise
     .all(parameters.map(callFetch))
     .then(responses => Promise.all(responses.map(parse)))
-    .then(renderView.bind(state, viewName))
+    .then(renderView.bind(state, viewName, fetchKit))
 }
