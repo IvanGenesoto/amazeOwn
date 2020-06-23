@@ -1,6 +1,7 @@
-module.exports = function renderConfirmationView(number) {
+module.exports = function renderConfirmationView() {
 
   const {renderElement: r} = this
+  const number = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000
   const $app = document.getElementById('app')
 
   $app.append(

@@ -1,10 +1,15 @@
 const express = require('express')
+const http = require('http')
 const path = require('path')
 const handleRequests = require('./handle-requests')
 const data = require('./data')
 const app = express()
+const publicPath = path.join(__dirname, 'public')
+const serve = express.static(publicPath)
+const server = http.createServer(app)
 const port = process.env.PORT || 3000
+const log = () => console.log('Listening on port ' + port)
 
 handleRequests(app, data)
-app.use(express.static(path.join(__dirname, 'public')))
-app.listen(port, () => console.log('Listening on port ' + port))
+app.use(serve)
+server.listen(port, log)

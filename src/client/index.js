@@ -7,7 +7,6 @@ const state = groups.reduce(reduce, {})
 const storage = state.storage = state.createStorage()
 
 state.cart = storage.getItem('cart') || []
-state.listenForClick()
-state.listenForSubmit()
 state.preloadFrame()
-state.fetchData('featured', 'list')
+Object.values(listeningGroup).forEach(listen => listen.call(state))
+state.initiate()
