@@ -1,6 +1,9 @@
 {
   "env": {"browser": true},
-  "extends": "standard",
+  "extends": [
+    "standard",
+    "plugin:import/recommended"
+  ],
   "reportUnusedDisableDirectives": true,
   "rules": {
     "space-before-function-paren": ["error", {
@@ -15,7 +18,7 @@
     "indent": ["error", 2, {
       "SwitchCase": 1,
       "flatTernaryExpressions": true,
-      "ignoredNodes": ["ConditionalExpression"]
+      "ignoredNodes": ["ConditionalExpression", "LogicalExpression"]
     }],
     "quotes": [1, "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
     "no-return-assign": "off",
@@ -23,6 +26,7 @@
         "args": "all", "argsIgnorePattern": "^unused", "varsIgnorePattern": "^unused"
     }],
     "standard/no-callback-literal": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": false}],
     "no-restricted-globals": [
       "error",
       "name",
