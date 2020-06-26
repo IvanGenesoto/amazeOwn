@@ -1,22 +1,15 @@
-module.exports = function fetchData(fetchKit) {
+module.exports = function fetchData(view, parameter = '', shouldReplace) {
 
   const state = this
-  const {renderView} = state
-  const {pathName, viewName, parameter = ''} = fetchKit
-  const parameters = Array.isArray(parameter) ? parameter : [parameter]
+  const {cart, alterHistory} = state
+  const isCart = view === 'cart'
+  const pathName = isCart ? 'item' : view
+  const parameters = isCart ? cart.map(item => item.id) : [parameter]
+  const callFetch = parameter => fetch(`/${pathName}/${parameter}`)
   const parse = response => response.json()
-
-  const getParameter = parameter => parameter && typeof parameter === 'object'
-    ? parameter.id
-    : parameter
-
-  const callFetch = parameter => {
-    const parameter_ = getParameter(parameter)
-    return fetch(`/${pathName}/${parameter_}`)
-  }
 
   Promise
     .all(parameters.map(callFetch))
     .then(responses => Promise.all(responses.map(parse)))
-    .then(renderView.bind(state, viewName, fetchKit))
+    .then(alterHistory.bind(state, view, parameter, shouldReplace))
 }

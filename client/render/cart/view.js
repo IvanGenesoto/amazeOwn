@@ -12,9 +12,8 @@ module.exports = function renderCartView(items) {
     return total + price * quantity
   }
 
-  const total = items
-    .reduce(add, 0)
-    .toFixed(2)
+  const total = items.reduce(add, 0)
+  const totalString = total.toFixed(2)
 
   const callRenderCartItem = (item, index) => {
     const {quantity} = cart[index] || {}
@@ -33,5 +32,5 @@ module.exports = function renderCartView(items) {
   )
 
   items.forEach(callRenderCartItem)
-  state.renderCartTotal(total)
+  total && state.renderCartTotal(totalString)
 }

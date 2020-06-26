@@ -4,7 +4,7 @@ module.exports = function renderConfirmOrderView(valueByName) {
   const $app = document.getElementById('app')
 
   $app.append(
-    r('div', {id: 'confirm-order', class: 'container'}, [
+    r('div', {id: 'confirm', class: 'container'}, [
       r('div', {class: 'row'}, [
         r('div', {class: 'col-xs-3'}),
         r('div', {class: 'col-xs-6'}, [

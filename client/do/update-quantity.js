@@ -1,8 +1,8 @@
-module.exports = function updateQuantity(id_, isPlus) {
+module.exports = function updateQuantity(id, isPlus) {
 
   const state = this
   const {cart} = state
-  const index = cart.findIndex(({id}) => id === id_)
+  const index = cart.findIndex(({id: id_}) => id_ === id)
   const item = cart[index]
 
   if (isPlus) ++item.quantity
@@ -11,5 +11,5 @@ module.exports = function updateQuantity(id_, isPlus) {
 
   state.saveCart()
   state.shouldAlterHistory = false
-  state.fetchData({pathName: 'item', viewName: 'cart', hash: '#cart', parameter: cart})
+  state.fetchData('cart')
 }

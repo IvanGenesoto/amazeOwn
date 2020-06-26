@@ -1,5 +1,6 @@
 module.exports = {
   addToCart: require('./add-to-cart'),
+  alterHistory: require('./alter-history'),
   createStorage: require('./create-storage'),
   fetchData: require('./fetch-data'),
   getItemCount: require('./get-item-count'),
