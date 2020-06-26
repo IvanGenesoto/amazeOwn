@@ -26,10 +26,8 @@ module.exports = function listenForSubmit() {
       valueByName[name] = value
       return valueByName
     }
-    if (id === 'search-form') return state.fetchData({
-      pathName: 'search', viewName: 'list', hash: '#search', parameter: query
-    })
+    if (id === 'search-form') return state.fetchData('search', query)
     const valueByName = Object.entries(idByName).reduce(appendValue, {})
-    state.renderView('confirm-order', null, valueByName)
+    state.alterHistory('confirm', '', false, valueByName)
   })
 }

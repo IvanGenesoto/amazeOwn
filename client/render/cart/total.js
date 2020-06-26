@@ -1,4 +1,4 @@
-module.exports = function renderCartTotal(total) {
+module.exports = function renderCartTotal(totalString) {
 
   const state = this
   const {renderElement: r, cart} = state
@@ -8,7 +8,7 @@ module.exports = function renderCartTotal(total) {
   const attributeByName = {
     class: 'btn btn-default own button cart',
     id: 'checkout-button',
-    'data-total': total
+    'data-total': totalString
   }
 
   hasItem || (attributeByName.disabled = true)
@@ -19,7 +19,7 @@ module.exports = function renderCartTotal(total) {
       'Total:',
       r('span', null, [
         '$',
-        r('span', null, total)
+        r('span', null, totalString)
       ])
     ])
   )

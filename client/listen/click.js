@@ -20,17 +20,11 @@ module.exports = function listenForClick() {
     const isMinus = classList.contains('minus')
     const isThumbnail = classList.contains('thumbnail')
     if (id === 'catch-me') return state.renderPromo()
-    if (id === 'cart-button' || id === 'item-count') state.fetchData({
-      pathName: 'item', viewName: 'cart', hash: '#cart', parameter: cart
-    })
-    if (getIsFeatured(id, classList)) return state.fetchData({
-      pathName: 'featured', viewName: 'list'
-    })
+    if (id === 'cart-button' || id === 'item-count') state.fetchData('cart')
+    if (getIsFeatured(id, classList)) return state.fetchData('featured')
     if (id === 'add-to-cart') return state.addToCart(dataId)
     if (isPlus || isMinus) return state.updateQuantity(dataId, isPlus)
-    if (dataId) return state.fetchData({
-      pathName: 'item', viewName: 'item', hash: '#item', parameter: dataId
-    })
+    if (dataId) return state.fetchData('item', dataId)
     if (isThumbnail) {
       const $displayedImage = document.getElementById('display-image')
       return $displayedImage.setAttribute('src', src)
@@ -42,10 +36,10 @@ module.exports = function listenForClick() {
       $imageView.remove()
       return $itemView.classList.remove('hidden')
     }
-    if (id === 'checkout-button') return state.renderView('checkout')
+    if (id === 'checkout-button') return state.alterHistory('checkout')
     if (id !== 'confirm-button') return
     cart.length = 0
     state.saveCart()
-    return state.renderView('confirmation')
+    return state.alterHistory('confirmation')
   })
 }
