@@ -2,13 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "stage",
+      "name": "watch",
       "type": "node",
       "request": "launch",
-      "skipFiles": ["<node_internals>/**"],
-      "preLaunchTask": "npm: stage",
-      "program": "${workspaceFolder}/server/index.js",
-      "postDebugTask": "npm: install"
+      "preLaunchTask": "npm: watch",
+      "program": "${workspaceFolder}/server/index.js"
     },
     {
       "name": "debug",
@@ -19,18 +17,14 @@
       "program": "${workspaceFolder}/server/index.js"
     },
     {
-      "name": "watch",
+      "name": "stage",
       "type": "node",
       "request": "launch",
-      "preLaunchTask": "npm: watch",
-      "program": "${workspaceFolder}/server/index.js"
-    },
-    {
-      "name": "kill",
-      "type": "node",
-      "request": "launch",
-      "preLaunchTask": "npm: kill",
-      "program": "${workspaceFolder}/server/data.js"
-    },
+      "skipFiles": ["<node_internals>/**"],
+      "env": {"NODE_ENV": "production"},
+      "preLaunchTask": "npm: stage",
+      "program": "${workspaceFolder}/server/index.js",
+      "postDebugTask": "npm: install"
+    }
   ]
 }
