@@ -16,7 +16,6 @@
     "watch:server": "nodemon .",
     "watch:client": "watchify client/index.js -o public/main.js",
     "watch": "run-p watch:*",
-    "kill": "pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
