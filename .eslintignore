@@ -1,5 +1,5 @@
-.DS_Store
 node_modules
+scratch
+.DS_Store
 npm-debug.log
-server/public/main.js
-scratch.js
+public/main.js
