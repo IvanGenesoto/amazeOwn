@@ -1,1 +1,5 @@
-ignores: ["htmlhint", "stylelint", "stylelint-config-standard"]
+ignores: [
+  "htmlhint",
+  "stylelint",
+  "stylelint-config-standard"
+]

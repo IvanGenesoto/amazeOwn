@@ -6,7 +6,7 @@ module.exports = function renderView(name, argument) {
   const renderViewByName = {
     cart: state.renderCartView,
     checkout: state.renderCheckoutView,
-    confirm: state.renderConfirmOrderView,
+    confirm: state.renderConfirmView,
     confirmation: state.renderConfirmationView,
     featured: state.renderListView,
     item: state.renderItemView,

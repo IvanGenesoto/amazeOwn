@@ -9,7 +9,7 @@
     "prestart": "run-s bundle prune",
     "start": "node .",
     "lint": "eslint --fix .",
-    "update": "ncu && ncu -u",
+    "update": "ncu -u",
     "clean": "rimraf node_modules public/main.js && npm i",
     "check": "depcheck",
     "stage": "run-s lint update clean check prestart",

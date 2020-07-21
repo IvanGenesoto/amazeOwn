@@ -1,6 +1,6 @@
-module.exports = function renderConfirmOrderView(valueByName) {
+module.exports = function renderConfirmView(valueByName) {
 
-  const {renderElement: r, total} = this
+  const {renderElement: r, totalString} = this
   const $app = document.getElementById('app')
 
   $app.append(
@@ -30,7 +30,7 @@ module.exports = function renderConfirmOrderView(valueByName) {
           ]),
           r('div', {class: 'row'}, [
             r('div', {class: 'col-xs-12'}, [
-              r('h3', {class: 'col-xs-12'}, 'Order Total: $' + total)
+              r('h3', {class: 'col-xs-12'}, 'Order Total: $' + totalString)
             ])
           ]),
           r('div', {class: 'row'}, [
