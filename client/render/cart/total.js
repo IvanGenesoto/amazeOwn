@@ -7,8 +7,7 @@ module.exports = function renderCartTotal(totalString) {
 
   const attributeByName = {
     class: 'btn btn-default own button cart',
-    id: 'checkout-button',
-    'data-total': totalString
+    id: 'checkout-button'
   }
 
   hasItem || (attributeByName.disabled = true)

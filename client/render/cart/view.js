@@ -1,7 +1,7 @@
 module.exports = function renderCartView(items) {
 
   const state = this
-  const {renderElement: r, cart} = state
+  const {renderElement: r, cart, setTotalString} = state
   const $app = document.getElementById('app')
   const itemCount = state.getItemCount()
   const title = itemCount ? 'Shopping Cart' : 'Your cart is empty.'
@@ -31,6 +31,7 @@ module.exports = function renderCartView(items) {
     ])
   )
 
+  setTotalString.call(state, totalString)
   items.forEach(callRenderCartItem)
   total && state.renderCartTotal(totalString)
 }

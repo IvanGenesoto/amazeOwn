@@ -9,6 +9,7 @@ module.exports = {
   preloadFrame: require('./preload-frame'),
   removePromo: require('./remove-promo'),
   saveCart: require('./save-cart'),
+  setTotalString: require('./set-total-string'),
   twirl: require('./twirl'),
   updateQuantity: require('./update-quantity')
 }
