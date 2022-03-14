@@ -34,7 +34,7 @@ module.exports = function renderCheckoutView() {
               r('input', {type: 'text', class: 'form-control', id: 'form-credit-card', placeholder: 'Credit card number'})
             ]),
             r('div', {class: 'form-group'}, [
-              r('label', {for: 'form-expiration-date'}, 'Experation Date'),
+              r('label', {for: 'form-expiration-date'}, 'Expiration Date'),
               r('input', {type: 'date', class: 'form-control', id: 'form-expiration-date'})
             ]),
             r('div', {class: 'form-group'}, [
