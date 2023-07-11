@@ -45,11 +45,11 @@
     "type": "git",
     "url": "git+https://github.com/IvanGenesoto/amazeown.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/IvanGenesoto/amazeown/issues"
   },
-  "homepage": "https://github.com/IvanGenesoto/amazeown#readme"
+  "homepage": "https://github.com/IvanGenesoto/amazeown#readme",
+  "author": "Ivan Genesoto",
+  "license": "UNLICENSED",
+  "keywords": []
 }
